@@ -1,0 +1,92 @@
+{
+    "company": "Tesla, Inc.",
+    "ticker": "TSLA",
+    "exchange": "NASDAQ",
+    "sector": "Consumer Discretionary — Electric Vehicles & Clean Energy",
+    "currency": "USD",
+    "units": "All figures in USD millions unless otherwise noted",
+    "analysis_date": "September 2026",
+    "data_sources": "Tesla 10-K Annual Reports (FY2021–FY2024), Analyst Consensus Estimates (FY2025E)",
+
+    "fiscal_years": ["FY2021", "FY2022", "FY2023", "FY2024", "FY2025E"],
+
+    "income_statement": {
+        "revenue":                    [53823, 81462, 96773,  97690, 112800],
+        "cost_of_revenue":            [40217, 60609, 79113,  76642,  87384],
+        "gross_profit":               [13606, 20853, 17660,  21048,  25416],
+        "research_development":       [ 2593,  3075,  3969,   4610,   5200],
+        "selling_general_admin":      [ 4517,  3946,  4800,   4443,   4900],
+        "depreciation_amortization":  [ 2911,  3747,  4667,   5770,   6400],
+        "operating_income":           [ 6496, 13832,  8891,  11995,  15316],
+        "ebitda":                     [ 9407, 17579, 13558,  17765,  21716],
+        "interest_expense":           [  371,   191,   156,     83,     65],
+        "tax_expense":                [  699,  1132,  1368,   3670,   3800],
+        "net_income":                 [ 5519, 12556,  7928,   7091,  10200]
+    },
+
+    "balance_sheet": {
+        "cash_and_equivalents":  [17576, 22185, 29094,  36563, 38200],
+        "current_assets":        [27100, 40917, 49616,  56078, 60500],
+        "total_assets":          [62131, 82338, 106618, 122070, 138000],
+        "current_liabilities":   [19705, 26709, 28748,  29566, 32500],
+        "long_term_debt":        [ 5245,  2567,  2857,   5735,  5400],
+        "total_debt":            [ 8874,  5748,  5829,   7547,  7200],
+        "total_equity":          [30189, 44704, 62634,  72941, 83100]
+    },
+
+    "cash_flow_statement": {
+        "operating_cash_flow":  [11497, 14724, 13256, 12032, 16500],
+        "capital_expenditures": [ 6514,  7158,  8877, 11339, 12000],
+        "free_cash_flow":       [ 4983,  7566,  4379,   693,  4500]
+    },
+
+    "shares_outstanding": [3009, 3164, 3174, 3211, 3220],
+
+    "market_data": {
+        "current_stock_price":        295.00,
+        "shares_outstanding_current": 3220,
+        "market_capitalization":      949900,
+        "enterprise_value":           918900,
+        "fifty_two_week_high":        365.00,
+        "fifty_two_week_low":         185.00
+    },
+
+    "wacc_inputs": {
+        "risk_free_rate":        0.038,
+        "beta":                  1.25,
+        "equity_risk_premium":   0.050,
+        "cost_of_equity":        0.1005,
+        "cost_of_debt_pretax":   0.045,
+        "tax_rate":              0.21,
+        "cost_of_debt_aftertax": 0.03555,
+        "equity_weight":         0.92,
+        "debt_weight":           0.08,
+        "wacc":                  0.0953
+    },
+
+    "dcf_assumptions": {
+        "projection_years":       5,
+        "base_year":              "FY2025E",
+        "revenue_growth_rates":   [0.12, 0.10, 0.09, 0.08, 0.07],
+        "ebitda_margin_targets":  [0.193, 0.195, 0.198, 0.200, 0.205],
+        "da_pct_revenue":         [0.057, 0.055, 0.054, 0.052, 0.050],
+        "capex_pct_revenue":      [0.095, 0.090, 0.088, 0.085, 0.082],
+        "nwc_pct_revenue":        [0.250, 0.245, 0.240, 0.235, 0.230],
+        "terminal_growth_rate":   0.025
+    },
+
+    "comparable_companies": {
+        "names":              ["Tesla",  "BYD Co.",  "Rivian Automotive", "Lucid Group", "Ford Motor Co."],
+        "tickers":            ["TSLA",   "BYDDY",    "RIVN",              "LCID",        "F"],
+        "market_cap":         [949900,   128500,     17800,               6900,          42300],
+        "enterprise_value":   [918900,   135200,     21500,               8200,          98700],
+        "revenue_ttm":        [112800,   89500,      6200,                2100,          165000],
+        "ebitda_ttm":         [21716,    10900,      -1420,               -2850,         15900],
+        "net_income_ttm":     [10200,    6950,       -3200,               -2600,         5100],
+        "ev_revenue":         [8.14,     1.51,       3.47,                3.90,          0.60],
+        "ev_ebitda":          [42.3,     12.4,       null,                null,          6.2],
+        "pe_ratio":           [93.1,     18.5,       null,                null,          8.3],
+        "revenue_growth_yoy": [0.155,    0.230,      0.520,               0.350,         -0.020],
+        "gross_margin":       [0.225,    0.195,      -0.420,              -0.950,        0.090]
+    }
+}
