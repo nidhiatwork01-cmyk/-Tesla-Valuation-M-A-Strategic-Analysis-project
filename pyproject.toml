@@ -1,0 +1,9 @@
+[project]
+name = "tesla-valuation-mna-model"
+version = "0.1.0"
+description = "Bain & Company M&A Tesla Valuation Model & Executive Dashboard"
+requires-python = ">=3.9"
+dependencies = []
+
+[tool.vercel]
+entrypoint = "app:app"
