@@ -77,12 +77,16 @@ The sensitivity matrix shows implied share price across Revenue Growth (±2%) an
 
 ```
 bain-valuation-mna-model/
-├── ratio_analysis.py              # Financial analysis engine (ratios + 7 charts + DCF)
-├── generate_valuation_model.py    # Excel workbook generator (4 tabs)
-├── generate_executive_deck.py     # 3-slide HTML executive teaser
-├── requirements.txt               # Python dependencies
+├── index.html                     # Interactive Executive Presentation (Vercel Live Web)
+├── vercel.json                    # Vercel static deployment routing
+├── README.md                      # Executive summary & documentation
 ├── data/
 │   └── tesla_financials.json      # 5-year financial data (reproducible)
+├── scripts/
+│   ├── ratio_analysis.py          # Financial analysis engine (ratios + 7 charts + DCF)
+│   ├── generate_valuation_model.py# Excel workbook generator (4 tabs)
+│   ├── generate_executive_deck.py # 3-slide HTML executive teaser generator
+│   └── requirements.txt           # Python dependencies
 ├── output/
 │   ├── valuation_model.xlsx       # ← DCF & Comps Excel Model
 │   ├── executive_teaser.html      # ← 3-Slide Executive Deck
@@ -95,7 +99,6 @@ bain-valuation-mna-model/
 │       ├── comps_ev_ebitda.png
 │       ├── sensitivity_heatmap.png
 │       └── dcf_waterfall.png
-└── README.md                      # ← You are here
 ```
 
 ---
@@ -104,22 +107,23 @@ bain-valuation-mna-model/
 
 ```bash
 # Clone the repository
-git clone https://github.com/YOUR_USERNAME/bain-valuation-mna-model.git
-cd bain-valuation-mna-model
+git clone https://github.com/nidhiatwork01-cmyk/-Tesla-Valuation-M-A-Strategic-Analysis-project.git
+cd -Tesla-Valuation-M-A-Strategic-Analysis-project
 
 # Install dependencies
-pip install -r requirements.txt
+pip install -r scripts/requirements.txt
 
 # Run the full analysis pipeline
-python ratio_analysis.py               # Generate charts + DCF + sensitivity
-python generate_valuation_model.py      # Generate Excel workbook
-python generate_executive_deck.py       # Generate HTML executive deck
+python scripts/ratio_analysis.py           # Generate charts + DCF + sensitivity
+python scripts/generate_valuation_model.py  # Generate Excel workbook
+python scripts/generate_executive_deck.py   # Generate HTML executive deck
 ```
 
 ### Output
+- **Interactive Web App**: Open `index.html` in your browser (or visit live on Vercel)
 - **7 financial charts** → `output/charts/`
 - **Excel valuation model** → `output/valuation_model.xlsx`
-- **Executive teaser deck** → `output/executive_teaser.html` (open in browser)
+- **Executive teaser deck** → `output/executive_teaser.html`
 
 ---
 

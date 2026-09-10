@@ -24,7 +24,7 @@ import json
 import base64
 from pathlib import Path
 
-ROOT_DIR   = Path(__file__).resolve().parent
+ROOT_DIR   = Path(__file__).resolve().parent.parent
 DATA_FILE  = ROOT_DIR / "data" / "tesla_financials.json"
 SUMMARY_FILE = ROOT_DIR / "output" / "analysis_summary.json"
 CHARTS_DIR = ROOT_DIR / "output" / "charts"

@@ -35,7 +35,7 @@ from pathlib import Path
 # CONFIGURATION
 # ===========================================================================
 
-ROOT_DIR = Path(__file__).resolve().parent
+ROOT_DIR = Path(__file__).resolve().parent.parent
 OUTPUT_DIR = ROOT_DIR / "output" / "charts"
 DATA_FILE = ROOT_DIR / "data" / "tesla_financials.json"
 

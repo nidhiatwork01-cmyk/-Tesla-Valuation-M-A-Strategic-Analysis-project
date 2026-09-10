@@ -28,7 +28,7 @@ from openpyxl.styles import (
 from openpyxl.utils import get_column_letter
 from openpyxl.formatting.rule import CellIsRule, ColorScaleRule
 
-ROOT_DIR   = Path(__file__).resolve().parent
+ROOT_DIR   = Path(__file__).resolve().parent.parent
 DATA_FILE  = ROOT_DIR / "data" / "tesla_financials.json"
 OUTPUT_DIR = ROOT_DIR / "output"
 
