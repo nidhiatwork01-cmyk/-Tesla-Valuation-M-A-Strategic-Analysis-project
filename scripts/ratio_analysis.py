@@ -20,6 +20,7 @@ Output:
 
 import json
 import sys
+import argparse
 import numpy as np
 import pandas as pd
 
@@ -38,6 +39,7 @@ from pathlib import Path
 ROOT_DIR = Path(__file__).resolve().parent.parent
 OUTPUT_DIR = ROOT_DIR / "output" / "charts"
 DATA_FILE = ROOT_DIR / "data" / "tesla_financials.json"
+COMPANIES_FILE = ROOT_DIR / "data" / "companies.json"
 
 # Bain & Company inspired color palette
 C = {
@@ -91,8 +93,15 @@ def setup_style():
 # DATA LOADING & RATIO COMPUTATION
 # ===========================================================================
 
-def load_data() -> dict:
-    """Load Tesla financial data from JSON."""
+def load_data(ticker: str = "TSLA") -> dict:
+    """Load company financial data from JSON (companies.json or fallback)."""
+    if COMPANIES_FILE.exists():
+        with open(COMPANIES_FILE, "r", encoding="utf-8") as f:
+            all_comps = json.load(f).get("companies", {})
+            if ticker in all_comps:
+                data = all_comps[ticker]
+                print(f"  + Loaded data for {data['company']} ({data['ticker']}) from companies.json")
+                return data
     with open(DATA_FILE, "r", encoding="utf-8") as f:
         data = json.load(f)
     print(f"  + Loaded data for {data['company']} ({data['ticker']})")
@@ -121,7 +130,7 @@ def compute_ratios(data: dict) -> dict:
     fcf       = np.array(cf["free_cash_flow"], dtype=float)
     ocf       = np.array(cf["operating_cash_flow"], dtype=float)
     capex     = np.array(cf["capital_expenditures"], dtype=float)
-    shares    = np.array(data["shares_outstanding"], dtype=float)
+    shares    = np.array(data.get("shares_outstanding", [data["market_data"]["shares_outstanding_current"]] * len(revenue)), dtype=float)
 
     # -- Growth Rates --
     rev_growth = np.full(len(revenue), np.nan)
@@ -482,9 +491,11 @@ def chart_comps(data):
     valid_ev.sort(key=lambda x: x[1])
     valid_pe.sort(key=lambda x: x[1])
 
+    target_name = data.get("company", "Tesla")
+    target_ticker = data.get("ticker", "TSLA")
     # -- EV/EBITDA --
     ev_n, ev_v = zip(*valid_ev)
-    c_ev = [C["red"] if n == "Tesla" else C["navy"] for n in ev_n]
+    c_ev = [C["red"] if (n == target_name or n == target_ticker or n in target_name) else C["navy"] for n in ev_n]
     bars1 = ax1.barh(range(len(ev_n)), ev_v, color=c_ev, alpha=0.85, height=0.50)
     ax1.set_yticks(range(len(ev_n))); ax1.set_yticklabels(ev_n, fontsize=10)
     ax1.set_xlabel("EV / EBITDA (x)"); ax1.set_title("EV / EBITDA", fontsize=13, fontweight="bold")
@@ -494,7 +505,7 @@ def chart_comps(data):
 
     # -- P/E --
     pe_n, pe_v = zip(*valid_pe)
-    c_pe = [C["red"] if n == "Tesla" else C["navy"] for n in pe_n]
+    c_pe = [C["red"] if (n == target_name or n == target_ticker or n in target_name) else C["navy"] for n in pe_n]
     bars2 = ax2.barh(range(len(pe_n)), pe_v, color=c_pe, alpha=0.85, height=0.50)
     ax2.set_yticks(range(len(pe_n))); ax2.set_yticklabels(pe_n, fontsize=10)
     ax2.set_xlabel("P / E Ratio (x)"); ax2.set_title("Price / Earnings", fontsize=13, fontweight="bold")
@@ -502,7 +513,7 @@ def chart_comps(data):
         ax2.text(v + 0.5, b.get_y() + b.get_height() / 2,
                  f"{v:.1f}x", va="center", fontsize=10, fontweight="bold")
 
-    fig.suptitle("Tesla vs Peers — Valuation Multiples Comparison",
+    fig.suptitle(f"{target_name} vs Peers — Valuation Multiples Comparison",
                  fontsize=15, fontweight="bold", y=1.02)
     _source(ax2, "Source: Market data Sept 2026  |  Rivian & Lucid excluded (negative EBITDA)")
     fig.tight_layout()
@@ -630,9 +641,11 @@ def print_summary(r, dcf, data):
     """Print a formatted executive summary to the console."""
     sep = "=" * 72
 
+    comp_name = data.get("company", "Target Company").upper()
+    ticker = data.get("ticker", "")
     print(f"\n{sep}")
-    print(f"  TESLA (TSLA) — FINANCIAL ANALYSIS EXECUTIVE SUMMARY")
-    print(f"  Analysis Date: {data['analysis_date']}")
+    print(f"  {comp_name} ({ticker}) — FINANCIAL ANALYSIS EXECUTIVE SUMMARY")
+    print(f"  Analysis Date: {data.get('analysis_date', 'September 2026')}")
     print(f"{sep}\n")
 
     # Build summary DataFrame
@@ -705,19 +718,19 @@ def print_summary(r, dcf, data):
 # MAIN
 # ===========================================================================
 
-def main():
-    """Run the complete Tesla financial analysis pipeline."""
+def analyze_company(ticker: str = "TSLA"):
+    """Run pipeline for a specific company."""
     banner = "=" * 72
     print(f"\n{banner}")
-    print("  TESLA FINANCIAL ANALYSIS ENGINE")
+    print(f"  M&A FINANCIAL ANALYSIS ENGINE — {ticker}")
     print("  Bain & Company M&A Readiness Portfolio Project")
     print(f"{banner}\n")
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     setup_style()
 
-    print(">> Phase 1: Data Loading")
-    data = load_data()
+    print(f">> Phase 1: Data Loading ({ticker})")
+    data = load_data(ticker)
 
     print("\n>> Phase 2: Ratio Computation")
     ratios = compute_ratios(data)
@@ -739,6 +752,21 @@ def main():
 
     print("\n>> Phase 6: Executive Summary")
     print_summary(ratios, dcf, data)
+
+    return data, ratios, dcf, sens
+
+
+def main():
+    """Run analysis pipeline with multi-company CLI options."""
+    parser = argparse.ArgumentParser(description="Multi-Company Valuation Engine")
+    parser.add_argument("--company", "-c", default="TSLA", help="Company ticker (TSLA, ZOMATO, AAPL, BYD)")
+    parser.add_argument("--all", action="store_true", help="Analyze all pre-loaded companies")
+    args = parser.parse_args()
+
+    target_tickers = ["TSLA", "ZOMATO", "AAPL", "BYD"] if args.all else [args.company.upper()]
+
+    for ticker in target_tickers:
+        data, ratios, dcf, sens = analyze_company(ticker)
 
     # -- Persist summary for downstream scripts --
     summary = {

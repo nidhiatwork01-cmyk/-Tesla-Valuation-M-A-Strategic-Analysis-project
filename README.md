@@ -1,32 +1,34 @@
-# 🏢 Tesla (TSLA) — Valuation & M&A Strategic Analysis
+# 🏢 Global M&A Valuation & Corporate Strategy Intelligence Platform
 
-> **Institutional-grade DCF valuation, comparable company analysis, and strategic recommendation for Tesla Inc.**
-> Built to demonstrate MBB-level business acumen, financial modeling, and strategic executive communication.
+> **Institutional-grade DCF valuation, comparable company benchmarking, and Bain-style strategic recommendations across global market leaders (Tesla, Zomato, Apple, BYD) with an interactive custom target company valuation builder.**
+> Built to demonstrate MBB-level (McKinsey, Bain, BCG) business acumen, corporate finance modeling, and strategic executive communication.
 
 [![Python](https://img.shields.io/badge/Python-3.9+-3776AB?logo=python&logoColor=white)](https://python.org)
-[![Excel](https://img.shields.io/badge/Excel-Workbook-217346?logo=microsoftexcel&logoColor=white)](output/valuation_model.xlsx)
+[![Excel](https://img.shields.io/badge/Excel-Multi--Company%20Models-217346?logo=microsoftexcel&logoColor=white)](output/valuation_model.xlsx)
+[![Vercel](https://img.shields.io/badge/Live%20Platform-Vercel-black?logo=vercel&logoColor=white)](https://scripts-vert-theta.vercel.app)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
 ---
 
-## 📋 Executive Summary
+## 📋 Executive Summary & Benchmark Portfolio
 
-| Metric | Value |
-|:---|:---|
-| **Target Company** | Tesla, Inc. (NASDAQ: TSLA) |
-| **Analysis Date** | September 2026 |
-| **Methodology** | DCF (5-year projection) + Comparable Company Analysis |
-| **WACC** | 9.53% (CAPM-derived) |
-| **Terminal Growth** | 2.5% (Gordon Growth Model) |
-| **Revenue CAGR (FY2021–FY2025E)** | ~20.3% |
+This platform allows recruiters, consultants, and analysts to dynamically analyze and compare high-conviction companies across sectors and geographies:
 
-### 🎯 Key Findings
+| Target Company | Ticker / Exchange | Sector / Thesis Focus | DCF WACC | Valuation Status |
+|:---|:---|:---|:---:|:---:|
+| **Tesla, Inc.** | `TSLA` (NASDAQ) | US Tech / EV & Clean Energy (Megapack + FSD) | 9.53% | Overvalued (Platform Premium) |
+| **Zomato Ltd.** | `ZOMATO` (NSE) | India Tech / Food Delivery & Quick Commerce (Blinkit) | 12.80% | Fair Value / Growth Inflection |
+| **Apple Inc.** | `AAPL` (NASDAQ) | US Mega-Cap / Consumer Ecosystem & Services | 8.80% | Defensible Compounder Moat |
+| **BYD Co. Ltd.** | `1211.HK` (HKEX) | China / Global Clean Tech & Vertical Battery Dominance | 8.60% | Deep Value Discount |
+| **➕ Custom Target** | User-defined | Real-time client-side DCF engine & sensitivity matrix | Dynamic | Real-Time Calculation |
 
-1. **Valuation**: Our DCF model implies Tesla is trading at a premium/discount to intrinsic value — see the full sensitivity analysis for the range of outcomes across WACC and growth scenarios.
+---
 
-2. **Growth Catalysts**: (a) Energy Storage (Megapack/Powerwall) growing >60% YoY with margins exceeding automotive; (b) FSD software creating a recurring, high-margin revenue stream.
+### 🎯 Key Platform Capabilities
 
-3. **Key Risk**: Chinese EV price competition (BYD, NIO) pressuring automotive gross margins. **Mitigation**: Revenue diversification into energy + services reduces auto dependency to ~65% by FY2030.
+1. **Interactive Multi-Company Switcher**: Instant switching between Tesla, Zomato, Apple, and BYD in the live web application, dynamically updating 5-year financials, KPI cards, DCF models, and 7 charts.
+2. **Interactive Custom Target Company Builder**: A modal form enabling anyone to input any target company's metrics (revenue, margin, shares, WACC, growth) to auto-calculate DCF, FCF projections, and sensitivity grids in real time with `localStorage` persistence.
+3. **Audit-Ready Excel Workbooks**: Pre-generated, formatted 4-tab Excel financial models for each marquee company (`valuation_model.xlsx`, `valuation_model_ZOMATO.xlsx`, `valuation_model_AAPL.xlsx`, `valuation_model_BYD.xlsx`).
 
 ---
 
@@ -113,17 +115,21 @@ cd -Tesla-Valuation-M-A-Strategic-Analysis-project
 # Install dependencies
 pip install -r scripts/requirements.txt
 
-# Run the full analysis pipeline
-python scripts/ratio_analysis.py           # Generate charts + DCF + sensitivity
-python scripts/generate_valuation_model.py  # Generate Excel workbook
-python scripts/generate_executive_deck.py   # Generate HTML executive deck
+# Run the full analysis pipeline for any company
+python scripts/ratio_analysis.py --company TSLA      # Tesla analysis
+python scripts/ratio_analysis.py --company ZOMATO    # Zomato analysis
+python scripts/ratio_analysis.py --company AAPL      # Apple analysis
+python scripts/ratio_analysis.py --company BYD       # BYD analysis
+python scripts/ratio_analysis.py --all               # Analyze all pre-loaded companies
+
+# Generate Excel workbooks
+python scripts/generate_valuation_model.py --all     # Generates Excel models for all companies
 ```
 
 ### Output
-- **Interactive Web App**: Open `index.html` in your browser (or visit live on Vercel)
-- **7 financial charts** → `output/charts/`
-- **Excel valuation model** → `output/valuation_model.xlsx`
-- **Executive teaser deck** → `output/executive_teaser.html`
+- **Interactive Multi-Company Web App**: Open `index.html` in your browser (or visit live on Vercel)
+- **4 Formatted Excel Valuation Models** → `output/valuation_model*.xlsx`
+- **Publication-Quality Financial Charts** → `output/charts/`
 
 ---
 

@@ -19,6 +19,7 @@ Output:
 """
 
 import json
+import argparse
 import numpy as np
 from pathlib import Path
 from openpyxl import Workbook
@@ -30,6 +31,7 @@ from openpyxl.formatting.rule import CellIsRule, ColorScaleRule
 
 ROOT_DIR   = Path(__file__).resolve().parent.parent
 DATA_FILE  = ROOT_DIR / "data" / "tesla_financials.json"
+COMPANIES_FILE = ROOT_DIR / "data" / "companies.json"
 OUTPUT_DIR = ROOT_DIR / "output"
 
 # -- Bain-inspired styling constants --
@@ -69,7 +71,12 @@ NUM_FMT_USD  = '$#,##0.00'
 NUM_FMT_MULT = '0.0"x"'
 
 
-def load_data():
+def load_data(ticker: str = "TSLA"):
+    if COMPANIES_FILE.exists():
+        with open(COMPANIES_FILE, "r", encoding="utf-8") as f:
+            all_comps = json.load(f).get("companies", {})
+            if ticker in all_comps:
+                return all_comps[ticker]
     with open(DATA_FILE, "r", encoding="utf-8") as f:
         return json.load(f)
 
@@ -127,15 +134,16 @@ def build_historical_tab(wb, data):
     inc = data["income_statement"]
     bs  = data["balance_sheet"]
     cf  = data["cash_flow_statement"]
-    shares = data["shares_outstanding"]
+    shares = data.get("shares_outstanding", [data["market_data"]["shares_outstanding_current"]] * len(years))
 
     col_w = {"A": 32, "B": 15, "C": 15, "D": 15, "E": 15, "F": 15}
     for c, w in col_w.items():
         ws.column_dimensions[c].width = w
 
     r = 1
-    _section_title(ws, r, 1, "Tesla, Inc. (TSLA) — Historical Financial Summary"); r += 1
-    note = ws.cell(row=r, column=1, value=data["units"] + "  |  " + data["data_sources"])
+    _section_title(ws, r, 1, f"{data['company']} ({data['ticker']}) — Historical Financial Summary"); r += 1
+    unit_str = data.get("unit_label", data.get("units", "Financials in Millions"))
+    note = ws.cell(row=r, column=1, value=unit_str)
     note.font = SMALL_ITALIC; r += 2
 
     # -- Income Statement --
@@ -251,16 +259,26 @@ def build_dcf_tab(wb, data):
     _section_title(ws, r, 1, "WACC Calculation", span=3); r += 1
     _write_header_row(ws, r, 1, ["Parameter", "Value", ""], fill=NAVY_FILL); r += 1
 
+    rf  = w["risk_free_rate"]
+    beta = w["beta"]
+    erp = w["equity_risk_premium"]
+    ke  = w.get("cost_of_equity", rf + beta * erp)
+    kd_pre = w.get("cost_of_debt_pretax", 0.045)
+    tax_r  = w.get("tax_rate", 0.21)
+    kd_after = w.get("cost_of_debt_aftertax", kd_pre * (1 - tax_r))
+    e_w = w.get("equity_weight", 0.92)
+    d_w = w.get("debt_weight", 0.08)
+
     wacc_rows = [
-        ("Risk-Free Rate (Rf)",       w["risk_free_rate"]),
-        ("Beta (β)",                   w["beta"]),
-        ("Equity Risk Premium (ERP)",  w["equity_risk_premium"]),
-        ("Cost of Equity (Ke)",        w["cost_of_equity"]),
-        ("Pre-Tax Cost of Debt (Kd)",  w["cost_of_debt_pretax"]),
-        ("Tax Rate",                   w["tax_rate"]),
-        ("After-Tax Cost of Debt",     w["cost_of_debt_aftertax"]),
-        ("Equity Weight (E/V)",        w["equity_weight"]),
-        ("Debt Weight (D/V)",          w["debt_weight"]),
+        ("Risk-Free Rate (Rf)",       rf),
+        ("Beta (β)",                   beta),
+        ("Equity Risk Premium (ERP)",  erp),
+        ("Cost of Equity (Ke)",        ke),
+        ("Pre-Tax Cost of Debt (Kd)",  kd_pre),
+        ("Tax Rate",                   tax_r),
+        ("After-Tax Cost of Debt",     kd_after),
+        ("Equity Weight (E/V)",        e_w),
+        ("Debt Weight (D/V)",          d_w),
     ]
     for label, val in wacc_rows:
         fmt = NUM_FMT_PCT2 if isinstance(val, float) and val < 1 else NUM_FMT_DEC1
@@ -272,7 +290,8 @@ def build_dcf_tab(wb, data):
     # -- Revenue Projections --
     base_rev = float(data["income_statement"]["revenue"][-1])
     growth_rates = a["revenue_growth_rates"]
-    proj_years = [f"FY{2026+i}E" for i in range(a["projection_years"])]
+    num_years = a.get("projection_years", len(growth_rates))
+    proj_years = [f"FY{2026+i}E" for i in range(num_years)]
 
     _section_title(ws, r, 1, "5-Year Revenue & FCF Projections", span=7); r += 1
     _write_header_row(ws, r, 1, ["Metric", "Base (FY2025E)"] + proj_years); r += 1
@@ -421,7 +440,8 @@ def build_comps_tab(wb, data):
         if fill: nc.fill = fill
 
         for j, (field, fmt) in enumerate(fields):
-            val = comp[field][idx]
+            vals_list = comp.get(field, [])
+            val = vals_list[idx] if idx < len(vals_list) else None
             cell = ws.cell(row=r, column=2 + j,
                            value=val if val is not None else "N/M")
             cell.alignment = RIGHT
@@ -434,44 +454,44 @@ def build_comps_tab(wb, data):
     # -- Implied valuation from comps --
     r += 2
     _section_title(ws, r, 1, "Implied Valuation from Peer Multiples", span=5); r += 1
-    _write_header_row(ws, r, 1, ["Method", "Peer Median", "Tesla Metric",
+    _write_header_row(ws, r, 1, ["Method", "Peer Median", "Target Metric",
                                   "Implied EV ($M)", "Implied Price"], fill=RED_FILL); r += 1
 
-    tesla_ebitda = float(comp["ebitda_ttm"][0])
-    tesla_rev    = float(comp["revenue_ttm"][0])
+    target_ebitda = float(comp.get("ebitda_ttm", [data["income_statement"]["ebitda"][-1]])[0])
+    target_rev    = float(comp.get("revenue_ttm", [data["income_statement"]["revenue"][-1]])[0])
     net_debt = float(data["balance_sheet"]["total_debt"][-1]) - \
                float(data["balance_sheet"]["cash_and_equivalents"][-1])
     shares   = data["market_data"]["shares_outstanding_current"]
 
-    # Compute peer medians (excluding Tesla, only positive values)
-    ev_ebitda_peers = [v for i, v in enumerate(comp["ev_ebitda"])
+    # Compute peer medians (excluding Target, only positive values)
+    ev_ebitda_peers = [v for i, v in enumerate(comp.get("ev_ebitda", []))
                        if v is not None and v > 0 and i != 0]
-    pe_peers = [v for i, v in enumerate(comp["pe_ratio"])
+    pe_peers = [v for i, v in enumerate(comp.get("pe_ratio", []))
                 if v is not None and v > 0 and i != 0]
-    ev_rev_peers = [v for i, v in enumerate(comp["ev_revenue"])
+    ev_rev_peers = [v for i, v in enumerate(comp.get("ev_revenue", []))
                     if v is not None and v > 0 and i != 0]
 
     comps_methods = []
     if ev_ebitda_peers:
         median_ev_ebitda = sorted(ev_ebitda_peers)[len(ev_ebitda_peers) // 2]
-        imp_ev = median_ev_ebitda * tesla_ebitda
+        imp_ev = median_ev_ebitda * target_ebitda
         imp_eq = imp_ev - net_debt
         imp_price = imp_eq / shares
-        comps_methods.append(("EV/EBITDA", median_ev_ebitda, tesla_ebitda, imp_ev, imp_price))
+        comps_methods.append(("EV/EBITDA", median_ev_ebitda, target_ebitda, imp_ev, imp_price))
 
     if ev_rev_peers:
         median_ev_rev = sorted(ev_rev_peers)[len(ev_rev_peers) // 2]
-        imp_ev = median_ev_rev * tesla_rev
+        imp_ev = median_ev_rev * target_rev
         imp_eq = imp_ev - net_debt
         imp_price = imp_eq / shares
-        comps_methods.append(("EV/Revenue", median_ev_rev, tesla_rev, imp_ev, imp_price))
+        comps_methods.append(("EV/Revenue", median_ev_rev, target_rev, imp_ev, imp_price))
 
     if pe_peers:
         median_pe = sorted(pe_peers)[len(pe_peers) // 2]
-        tesla_ni = float(comp["net_income_ttm"][0])
-        imp_mc = median_pe * tesla_ni
+        target_ni = float(comp.get("net_income_ttm", [data["income_statement"]["net_income"][-1]])[0])
+        imp_mc = median_pe * target_ni
         imp_price = imp_mc / shares
-        comps_methods.append(("P/E Ratio", median_pe, tesla_ni, imp_mc, imp_price))
+        comps_methods.append(("P/E Ratio", median_pe, target_ni, imp_mc, imp_price))
 
     for method, mult, metric, imp_ev, imp_price in comps_methods:
         row_vals = [mult, metric, imp_ev, imp_price]
@@ -607,13 +627,10 @@ def build_sensitivity_tab(wb, data):
 # MAIN
 # ===========================================================================
 
-def main():
-    print("\n" + "=" * 72)
-    print("  EXCEL VALUATION MODEL GENERATOR")
-    print("=" * 72 + "\n")
-
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    data = load_data()
+def generate_workbook(ticker: str = "TSLA"):
+    data = load_data(ticker)
+    comp_name = data.get("company", ticker)
+    print(f"  Generating Excel model for: {comp_name} ({ticker})")
 
     wb = Workbook()
     build_historical_tab(wb, data)
@@ -621,9 +638,34 @@ def main():
     build_comps_tab(wb, data)
     build_sensitivity_tab(wb, data)
 
-    out_path = OUTPUT_DIR / "valuation_model.xlsx"
+    # Save as default valuation_model.xlsx for TSLA, or valuation_model_<TICKER>.xlsx
+    if ticker.upper() == "TSLA":
+        out_path = OUTPUT_DIR / "valuation_model.xlsx"
+    else:
+        out_path = OUTPUT_DIR / f"valuation_model_{ticker.upper()}.xlsx"
+
     wb.save(str(out_path))
-    print(f"\n  + Workbook saved to {out_path.relative_to(ROOT_DIR)}")
+    print(f"  + Workbook saved to {out_path.relative_to(ROOT_DIR)}\n")
+    return out_path
+
+
+def main():
+    print("\n" + "=" * 72)
+    print("  EXCEL VALUATION MODEL GENERATOR")
+    print("=" * 72 + "\n")
+
+    parser = argparse.ArgumentParser(description="Multi-Company Excel Valuation Model Generator")
+    parser.add_argument("--company", "-c", default="TSLA", help="Target company ticker (TSLA, ZOMATO, AAPL, BYD)")
+    parser.add_argument("--all", action="store_true", help="Generate Excel workbooks for all pre-loaded companies")
+    args = parser.parse_args()
+
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+
+    target_tickers = ["TSLA", "ZOMATO", "AAPL", "BYD"] if args.all else [args.company.upper()]
+
+    for ticker in target_tickers:
+        generate_workbook(ticker)
+
     print("=" * 72 + "\n")
 
 

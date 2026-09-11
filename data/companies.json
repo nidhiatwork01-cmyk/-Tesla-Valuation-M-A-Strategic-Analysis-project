@@ -1,0 +1,320 @@
+{
+  "companies": {
+    "TSLA": {
+      "company": "Tesla, Inc.",
+      "ticker": "TSLA",
+      "exchange": "NASDAQ",
+      "sector": "Consumer Discretionary — Electric Vehicles & Clean Energy",
+      "currency_symbol": "$",
+      "currency_code": "USD",
+      "unit_label": "USD Millions ($M)",
+      "market_cap_display": "$950B",
+      "analysis_date": "September 2026",
+      "overview": "Tesla is the world's leading electric vehicle manufacturer and clean energy platform, operating across automotive, energy generation/storage (Megapack), and autonomous AI systems (FSD, Robotaxi).",
+      "fiscal_years": ["FY2021", "FY2022", "FY2023", "FY2024", "FY2025E"],
+      "income_statement": {
+        "revenue": [53823, 81462, 96773, 97690, 112800],
+        "cost_of_revenue": [40217, 60609, 79113, 76642, 87384],
+        "gross_profit": [13606, 20853, 17660, 21048, 25416],
+        "research_development": [2593, 3075, 3969, 4610, 5200],
+        "selling_general_admin": [4517, 3946, 4800, 4443, 4900],
+        "depreciation_amortization": [2911, 3747, 4667, 5770, 6400],
+        "operating_income": [6496, 13832, 8891, 11995, 15316],
+        "ebitda": [9407, 17579, 13558, 17765, 21716],
+        "interest_expense": [371, 191, 156, 83, 65],
+        "tax_expense": [699, 1132, 1368, 3670, 3800],
+        "net_income": [5519, 12556, 7928, 7091, 10200]
+      },
+      "balance_sheet": {
+        "cash_and_equivalents": [17576, 22185, 29094, 36563, 38200],
+        "current_assets": [27100, 40917, 49616, 56078, 60500],
+        "total_assets": [62131, 82338, 106618, 122070, 138000],
+        "current_liabilities": [19705, 26709, 28748, 29566, 32500],
+        "total_debt": [8874, 5748, 5829, 7547, 7200],
+        "total_equity": [30189, 44704, 62634, 72941, 83100]
+      },
+      "cash_flow_statement": {
+        "operating_cash_flow": [11497, 14724, 13256, 12032, 16500],
+        "capital_expenditures": [6514, 7158, 8877, 11339, 12000],
+        "free_cash_flow": [4983, 7566, 4379, 693, 4500]
+      },
+      "market_data": {
+        "current_stock_price": 295.0,
+        "shares_outstanding_current": 3220,
+        "market_capitalization": 949900,
+        "enterprise_value": 918900
+      },
+      "wacc_inputs": {
+        "risk_free_rate": 0.038,
+        "beta": 1.25,
+        "equity_risk_premium": 0.05,
+        "tax_rate": 0.21,
+        "cost_of_debt_pretax": 0.045,
+        "wacc": 0.0953
+      },
+      "dcf_assumptions": {
+        "revenue_growth_rates": [0.12, 0.10, 0.09, 0.08, 0.07],
+        "ebitda_margin_targets": [0.193, 0.195, 0.198, 0.200, 0.205],
+        "da_pct_revenue": [0.057, 0.055, 0.054, 0.052, 0.050],
+        "capex_pct_revenue": [0.095, 0.090, 0.088, 0.085, 0.082],
+        "nwc_pct_revenue": [0.25, 0.245, 0.24, 0.235, 0.23],
+        "terminal_growth_rate": 0.025
+      },
+      "comparable_companies": {
+        "names": ["Tesla", "BYD Co.", "Rivian Automotive", "Lucid Group", "Ford Motor Co."],
+        "tickers": ["TSLA", "BYDDY", "RIVN", "LCID", "F"],
+        "ev_revenue": [8.14, 1.51, 3.47, 3.90, 0.60],
+        "ev_ebitda": [42.3, 12.4, null, null, 6.2],
+        "pe_ratio": [93.1, 18.5, null, null, 8.3],
+        "revenue_growth_yoy": [0.155, 0.230, 0.520, 0.350, -0.020],
+        "gross_margin": [0.225, 0.195, -0.420, -0.950, 0.090]
+      },
+      "strategic_thesis": {
+        "valuation_verdict": "Overvalued by ~79% on a pure-hardware DCF, reflecting massive platform optionality baked into current multiples.",
+        "growth_catalysts": [
+          "Energy Storage Hypergrowth: Megapack and Powerwall revenues scaling >60% YoY with gross margins exceeding automotive.",
+          "FSD & Robotaxi Network: High-margin recurring software revenue stream transforming hardware unit economics into an asset-light ecosystem."
+        ],
+        "key_risk": "Intensifying price competition from Chinese OEMs (BYD, NIO) threatening gross margin recovery.",
+        "mitigation": "Strategic diversification into energy storage and software services reduces automotive dependency from ~85% to ~65% by FY2030."
+      }
+    },
+    "ZOMATO": {
+      "company": "Zomato Limited",
+      "ticker": "ZOMATO",
+      "exchange": "NSE / BSE",
+      "sector": "Consumer Internet — Food Delivery & Quick Commerce (Blinkit)",
+      "currency_symbol": "₹",
+      "currency_code": "INR",
+      "unit_label": "INR Crores (₹ Cr)",
+      "market_cap_display": "₹2,38,000 Cr (~$28.5B)",
+      "analysis_date": "September 2026",
+      "overview": "Zomato is India's preeminent consumer tech champion, operating market-leading food delivery alongside Blinkit (hyper-growth 10-minute quick commerce) and Hyperpure (B2B restaurant supply).",
+      "fiscal_years": ["FY2021", "FY2022", "FY2023", "FY2024", "FY2025E"],
+      "income_statement": {
+        "revenue": [1994, 4192, 7079, 12114, 20500],
+        "cost_of_revenue": [1103, 2378, 4140, 6890, 11480],
+        "gross_profit": [891, 1814, 2939, 5224, 9020],
+        "research_development": [145, 252, 330, 480, 720],
+        "selling_general_admin": [1213, 2412, 3320, 4072, 6200],
+        "depreciation_amortization": [138, 148, 443, 560, 680],
+        "operating_income": [-605, -994, -1154, 112, 1420],
+        "ebitda": [-467, -846, -711, 672, 2100],
+        "interest_expense": [12, 15, 48, 62, 75],
+        "tax_expense": [0, 0, 0, 85, 310],
+        "net_income": [-816, -1222, -971, 351, 1750]
+      },
+      "balance_sheet": {
+        "cash_and_equivalents": [3150, 6890, 11320, 12240, 13800],
+        "current_assets": [4200, 8400, 13100, 14500, 16900],
+        "total_assets": [8700, 16500, 21500, 24100, 28200],
+        "current_liabilities": [1200, 2100, 2700, 3100, 3800],
+        "total_debt": [45, 60, 180, 220, 250],
+        "total_equity": [7455, 14340, 18620, 20780, 24150]
+      },
+      "cash_flow_statement": {
+        "operating_cash_flow": [-580, -790, -420, 860, 2400],
+        "capital_expenditures": [110, 140, 210, 380, 650],
+        "free_cash_flow": [-690, -930, -630, 480, 1750]
+      },
+      "market_data": {
+        "current_stock_price": 270.0,
+        "shares_outstanding_current": 8830,
+        "market_capitalization": 238410,
+        "enterprise_value": 224860
+      },
+      "wacc_inputs": {
+        "risk_free_rate": 0.070,
+        "beta": 1.15,
+        "equity_risk_premium": 0.055,
+        "tax_rate": 0.25,
+        "cost_of_debt_pretax": 0.085,
+        "wacc": 0.128
+      },
+      "dcf_assumptions": {
+        "revenue_growth_rates": [0.35, 0.28, 0.22, 0.18, 0.15],
+        "ebitda_margin_targets": [0.105, 0.125, 0.140, 0.155, 0.170],
+        "da_pct_revenue": [0.033, 0.030, 0.028, 0.026, 0.025],
+        "capex_pct_revenue": [0.035, 0.032, 0.030, 0.028, 0.025],
+        "nwc_pct_revenue": [0.05, 0.05, 0.05, 0.05, 0.05],
+        "terminal_growth_rate": 0.055
+      },
+      "comparable_companies": {
+        "names": ["Zomato", "Swiggy", "DoorDash", "Delivery Hero", "Meituan"],
+        "tickers": ["ZOMATO", "SWIGGY", "DASH", "DHER", "3690.HK"],
+        "ev_revenue": [10.96, 7.80, 4.10, 1.05, 2.40],
+        "ev_ebitda": [107.0, null, 28.5, 14.2, 16.8],
+        "pe_ratio": [136.0, null, 42.0, null, 21.0],
+        "revenue_growth_yoy": [0.692, 0.380, 0.240, 0.160, 0.210],
+        "gross_margin": [0.440, 0.390, 0.490, 0.330, 0.360]
+      },
+      "strategic_thesis": {
+        "valuation_verdict": "Fairly valued to modest upside (~12%) on aggressive quick-commerce compounding, with Blinkit dark-store profitability inflecting faster than Street estimates.",
+        "growth_catalysts": [
+          "Blinkit Quick-Commerce Disruption: Dark store network scaling past 1,000+ hubs, expanding average order values (AOV) into electronics, beauty, and festive retail with 20%+ take-rates.",
+          "Operating Leverage & Ad Revenue: High-margin in-app advertising monetization now exceeding 3.5% of Gross Order Value (GOV), expanding contribution margins directly into EBITDA."
+        ],
+        "key_risk": "Fierce hyperlocal retail competition as well-funded players (Zepto, Swiggy Instamart, Reliance) ignite dark-store rent and delivery partner subsidy wars.",
+        "mitigation": "Unmatched balance sheet net cash (~₹13,800 Cr) provides financial firepower to out-scale competitors, achieve regional supply density, and secure prime warehouse real estate."
+      }
+    },
+    "AAPL": {
+      "company": "Apple Inc.",
+      "ticker": "AAPL",
+      "exchange": "NASDAQ",
+      "sector": "Information Technology — Consumer Ecosystem & Services",
+      "currency_symbol": "$",
+      "currency_code": "USD",
+      "unit_label": "USD Millions ($M)",
+      "market_cap_display": "$3.45T",
+      "analysis_date": "September 2026",
+      "overview": "Apple designs and markets premium consumer hardware (iPhone, Mac, iPad, Wearables) and operates a high-margin digital services ecosystem (App Store, iCloud, Apple Pay, AppleCare) with over 2.2 billion active devices.",
+      "fiscal_years": ["FY2021", "FY2022", "FY2023", "FY2024", "FY2025E"],
+      "income_statement": {
+        "revenue": [365817, 394328, 383285, 391035, 415000],
+        "cost_of_revenue": [212981, 223546, 214137, 210352, 223270],
+        "gross_profit": [152836, 170782, 169148, 180683, 191730],
+        "research_development": [21914, 26251, 29915, 31370, 33500],
+        "selling_general_admin": [21973, 25094, 24932, 25700, 26800],
+        "depreciation_amortization": [11284, 11104, 11519, 11900, 12200],
+        "operating_income": [108949, 119437, 114301, 123613, 131430],
+        "ebitda": [120233, 130541, 125820, 135513, 143630],
+        "interest_expense": [2645, 2931, 3933, 3800, 3600],
+        "tax_expense": [14527, 19300, 16741, 19000, 20200],
+        "net_income": [94680, 99803, 96995, 101500, 108500]
+      },
+      "balance_sheet": {
+        "cash_and_equivalents": [34940, 23646, 29965, 32500, 35000],
+        "current_assets": [134836, 135405, 143566, 148000, 155000],
+        "total_assets": [351002, 352755, 352583, 360000, 372000],
+        "current_liabilities": [125481, 153982, 145308, 149000, 153000],
+        "total_debt": [124719, 120069, 111088, 105000, 98000],
+        "total_equity": [63090, 50672, 62146, 68000, 75000]
+      },
+      "cash_flow_statement": {
+        "operating_cash_flow": [104038, 122151, 110543, 118000, 126000],
+        "capital_expenditures": [11085, 10708, 10959, 11500, 12000],
+        "free_cash_flow": [92953, 111443, 99584, 106500, 114000]
+      },
+      "market_data": {
+        "current_stock_price": 226.0,
+        "shares_outstanding_current": 15280,
+        "market_capitalization": 3453280,
+        "enterprise_value": 3516280
+      },
+      "wacc_inputs": {
+        "risk_free_rate": 0.038,
+        "beta": 1.05,
+        "equity_risk_premium": 0.05,
+        "tax_rate": 0.16,
+        "cost_of_debt_pretax": 0.038,
+        "wacc": 0.088
+      },
+      "dcf_assumptions": {
+        "revenue_growth_rates": [0.065, 0.060, 0.055, 0.050, 0.045],
+        "ebitda_margin_targets": [0.348, 0.352, 0.355, 0.358, 0.360],
+        "da_pct_revenue": [0.029, 0.028, 0.027, 0.026, 0.025],
+        "capex_pct_revenue": [0.029, 0.028, 0.027, 0.026, 0.025],
+        "nwc_pct_revenue": [-0.015, -0.015, -0.015, -0.015, -0.015],
+        "terminal_growth_rate": 0.028
+      },
+      "comparable_companies": {
+        "names": ["Apple", "Microsoft", "Alphabet", "Amazon", "Samsung"],
+        "tickers": ["AAPL", "MSFT", "GOOGL", "AMZN", "005930.KS"],
+        "ev_revenue": [8.47, 12.10, 6.20, 3.10, 1.10],
+        "ev_ebitda": [24.5, 23.8, 17.5, 16.2, 7.8],
+        "pe_ratio": [31.8, 33.2, 23.5, 41.0, 12.4],
+        "revenue_growth_yoy": [0.061, 0.150, 0.140, 0.110, 0.080],
+        "gross_margin": [0.462, 0.698, 0.575, 0.485, 0.380]
+      },
+      "strategic_thesis": {
+        "valuation_verdict": "Fairly valued with defensible moat; intrinsic value aligns within ±5% of trading price supported by immense $110B+ annual FCF and aggressive share repurchases.",
+        "growth_catalysts": [
+          "Services Gross Margin Expansion: Services segment (>74% gross margin) compounding at double digits toward $100B+ annual run-rate.",
+          "Apple Intelligence Hardware Supercycle: On-device generative AI features catalyzing accelerated iPhone upgrade cycles among the 1.5B+ installed base."
+        ],
+        "key_risk": "Regulatory scrutiny on App Store take-rates (EU DMA, US DOJ antitrust litigation) and hardware maturation in China.",
+        "mitigation": "Expansion of direct services monetization (Apple Silicon cloud infrastructure, enterprise subscriptions) and supply chain geographic hedging into India and Vietnam."
+      }
+    },
+    "BYD": {
+      "company": "BYD Company Limited",
+      "ticker": "1211.HK",
+      "exchange": "HKEX / Shenzhen",
+      "sector": "Consumer Discretionary — New Energy Vehicles & Batteries",
+      "currency_symbol": "¥",
+      "currency_code": "CNY",
+      "unit_label": "CNY Millions (¥M)",
+      "market_cap_display": "¥820B (~$115B)",
+      "analysis_date": "September 2026",
+      "overview": "BYD is the world's largest manufacturer of plug-in electric vehicles and a global tier-1 battery producer, characterized by extreme vertical integration (in-house Blade batteries, semiconductors, and mining).",
+      "fiscal_years": ["FY2021", "FY2022", "FY2023", "FY2024", "FY2025E"],
+      "income_statement": {
+        "revenue": [216142, 424061, 602315, 720000, 850000],
+        "cost_of_revenue": [188056, 351980, 480660, 568800, 663000],
+        "gross_profit": [28086, 72081, 121655, 151200, 187000],
+        "research_development": [10627, 20223, 39918, 48000, 58000],
+        "selling_general_admin": [11603, 20120, 35300, 43200, 51000],
+        "depreciation_amortization": [13200, 21500, 31200, 38000, 44000],
+        "operating_income": [5856, 31738, 46437, 60000, 78000],
+        "ebitda": [19056, 53238, 77637, 98000, 122000],
+        "interest_expense": [1796, 1612, 1890, 1950, 2100],
+        "tax_expense": [1020, 4120, 6800, 8900, 11500],
+        "net_income": [3045, 16626, 30041, 38500, 49500]
+      },
+      "balance_sheet": {
+        "cash_and_equivalents": [50460, 51470, 109090, 128000, 145000],
+        "current_assets": [140200, 240800, 355000, 410000, 485000],
+        "total_assets": [295700, 493800, 679500, 785000, 910000],
+        "current_liabilities": [162400, 281600, 398000, 455000, 520000],
+        "total_debt": [38500, 42100, 40500, 38000, 35000],
+        "total_equity": [95000, 119500, 139000, 172000, 218000]
+      },
+      "cash_flow_statement": {
+        "operating_cash_flow": [65466, 140920, 169725, 195000, 225000],
+        "capital_expenditures": [37340, 98900, 124000, 135000, 145000],
+        "free_cash_flow": [28126, 42020, 45725, 60000, 80000]
+      },
+      "market_data": {
+        "current_stock_price": 282.0,
+        "shares_outstanding_current": 2911,
+        "market_capitalization": 820902,
+        "enterprise_value": 710902
+      },
+      "wacc_inputs": {
+        "risk_free_rate": 0.024,
+        "beta": 1.10,
+        "equity_risk_premium": 0.060,
+        "tax_rate": 0.15,
+        "cost_of_debt_pretax": 0.038,
+        "wacc": 0.086
+      },
+      "dcf_assumptions": {
+        "revenue_growth_rates": [0.18, 0.15, 0.12, 0.10, 0.08],
+        "ebitda_margin_targets": [0.145, 0.148, 0.150, 0.152, 0.155],
+        "da_pct_revenue": [0.052, 0.050, 0.048, 0.046, 0.045],
+        "capex_pct_revenue": [0.150, 0.130, 0.110, 0.095, 0.085],
+        "nwc_pct_revenue": [-0.06, -0.06, -0.06, -0.06, -0.06],
+        "terminal_growth_rate": 0.025
+      },
+      "comparable_companies": {
+        "names": ["BYD", "Tesla", "Geely Auto", "Li Auto", "SAIC Motor"],
+        "tickers": ["1211.HK", "TSLA", "0175.HK", "LI", "600104.SS"],
+        "ev_revenue": [0.84, 8.14, 0.35, 1.15, 0.22],
+        "ev_ebitda": [5.8, 42.3, 4.2, 8.5, 3.8],
+        "pe_ratio": [16.5, 93.1, 9.8, 17.2, 8.1],
+        "revenue_growth_yoy": [0.180, 0.155, 0.260, 0.320, 0.030],
+        "gross_margin": [0.220, 0.225, 0.152, 0.215, 0.105]
+      },
+      "strategic_thesis": {
+        "valuation_verdict": "Undervalued by ~25-30% vs. global peers; deep valuation discount due to geopolitical and China country-risk despite industry-leading unit margins and battery cost structure.",
+        "growth_catalysts": [
+          "Global Export Expansion: Overseas automotive shipments multiplying into Southeast Asia, Europe, and Latin America with 2.5x higher ASPs than domestic Chinese market.",
+          "Blade Battery Supply Dominance: Captive and third-party battery supply scale insulating BYD from raw material price shocks and creating high-margin external component sales."
+        ],
+        "key_risk": "European and Western tariffs on Chinese manufactured EVs and intensifying domestic price warfare in China's entry-level market.",
+        "mitigation": "Accelerated localized assembly plant construction in Hungary, Thailand, Brazil, and Turkey to bypass protective import tariffs and establish local manufacturing presence."
+      }
+    }
+  }
+}
