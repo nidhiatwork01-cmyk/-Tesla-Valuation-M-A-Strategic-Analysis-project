@@ -3,410 +3,663 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Global M&A Valuation & Corporate Strategy Platform | Bain-Grade Intelligence</title>
+<title>Global M&A Valuation & Corporate Strategy Platform | Bain & Company Intelligence</title>
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
     :root {
         --bain-red: #CC0000;
+        --bain-red-glow: rgba(204, 0, 0, 0.25);
         --bain-dark-red: #990000;
-        --bain-navy: #003366;
-        --bain-blue: #0066CC;
-        --bain-grey: #666666;
-        --bain-light: #F8F9FA;
-        --bain-green: #2E7D32;
-        --bain-amber: #EF6C00;
+        --navy-900: #07101E;
+        --navy-800: #0B192C;
+        --navy-700: #1E3E62;
+        --navy-600: #003366;
+        --navy-500: #0066CC;
+        --emerald-500: #10B981;
+        --emerald-100: #D1FAE5;
+        --rose-500: #EF4444;
+        --rose-100: #FEE2E2;
+        --amber-500: #F59E0B;
+        --slate-50: #F8FAFC;
+        --slate-100: #F1F5F9;
+        --slate-200: #E2E8F0;
+        --slate-300: #CBD5E1;
+        --slate-400: #94A3B8;
+        --slate-600: #475569;
+        --slate-700: #334155;
+        --slate-900: #0F172A;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', 'Calibri', Arial, sans-serif; background: #eef2f5; color: #1a1a2e; }
+    body {
+        font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        background: #F1F5F9; color: var(--slate-900); min-height: 100vh;
+        -webkit-font-smoothing: antialiased;
+    }
 
-    /* Sticky Platform Navigation */
-    .top-nav {
+    /* ═══════════════════════════════════════════════════════ */
+    /* TOP PLATFORM BAR                                        */
+    /* ═══════════════════════════════════════════════════════ */
+    .top-header {
         position: sticky; top: 0; z-index: 1000;
-        background: #002244; color: white; padding: 12px 36px;
+        background: rgba(7, 16, 30, 0.94);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        padding: 12px 32px;
         display: flex; justify-content: space-between; align-items: center;
-        box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+        color: white;
     }
-    .top-nav-brand {
-        display: flex; align-items: center; gap: 12px;
+    .brand-section { display: flex; align-items: center; gap: 14px; }
+    .bain-emblem {
+        background: linear-gradient(135deg, #E60000 0%, #990000 100%);
+        color: white; font-weight: 800; font-size: 11.5px;
+        padding: 5px 11px; border-radius: 4px; letter-spacing: 1.2px;
+        box-shadow: 0 2px 10px var(--bain-red-glow);
     }
-    .bain-logo-badge {
-        background: var(--bain-red); color: white; font-weight: 800;
-        padding: 4px 10px; border-radius: 3px; font-size: 13px; letter-spacing: 1px;
-    }
-    .top-nav-title { font-size: 15px; font-weight: 700; letter-spacing: -0.3px; }
+    .brand-text h1 { font-size: 15px; font-weight: 700; letter-spacing: -0.2px; line-height: 1.2; }
+    .brand-text p { font-size: 11px; color: var(--slate-400); margin-top: 1px; display: flex; align-items: center; gap: 6px; }
+    .pulse-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--emerald-500); box-shadow: 0 0 8px var(--emerald-500); }
 
-    .nav-actions { display: flex; align-items: center; gap: 10px; }
-    .btn {
-        display: inline-flex; align-items: center; gap: 6px;
-        padding: 7px 14px; border-radius: 4px; font-size: 12px; font-weight: 600;
-        cursor: pointer; text-decoration: none; border: none; transition: all 0.2s ease;
+    .header-actions { display: flex; align-items: center; gap: 10px; }
+    .nav-btn {
+        display: inline-flex; align-items: center; gap: 7px;
+        padding: 7px 14px; border-radius: 6px; font-size: 12px; font-weight: 600;
+        cursor: pointer; text-decoration: none; border: 1px solid transparent;
+        transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .btn-green { background: #2E7D32; color: white; }
-    .btn-green:hover { background: #1b5e20; }
-    .btn-red { background: var(--bain-red); color: white; }
-    .btn-red:hover { background: var(--bain-dark-red); }
-    .btn-outline { background: rgba(255,255,255,0.12); color: white; }
-    .btn-outline:hover { background: rgba(255,255,255,0.25); }
+    .nav-btn-green { background: #10B981; color: white; box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3); }
+    .nav-btn-green:hover { background: #059669; transform: translateY(-1px); }
+    .nav-btn-red { background: var(--bain-red); color: white; box-shadow: 0 2px 8px var(--bain-red-glow); }
+    .nav-btn-red:hover { background: var(--bain-dark-red); transform: translateY(-1px); }
+    .nav-btn-glass { background: rgba(255, 255, 255, 0.08); color: white; border-color: rgba(255, 255, 255, 0.12); }
+    .nav-btn-glass:hover { background: rgba(255, 255, 255, 0.16); border-color: rgba(255, 255, 255, 0.2); }
 
-    /* Company Switcher Pill Bar */
-    .switcher-container {
-        max-width: 1140px; margin: 24px auto 0; padding: 0 20px;
-        display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    /* ═══════════════════════════════════════════════════════ */
+    /* CONTROL BAR (SWITCHER + VIEW MODES)                     */
+    /* ═══════════════════════════════════════════════════════ */
+    .control-ribbon {
+        background: white; border-bottom: 1px solid var(--slate-200);
+        padding: 14px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.02);
     }
-    .company-pills { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .ribbon-inner {
+        max-width: 1200px; margin: 0 auto;
+        display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
+    }
+    .pills-group { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .company-pill {
-        padding: 8px 18px; border-radius: 24px; font-size: 13px; font-weight: 700;
-        background: white; color: var(--bain-navy); border: 2px solid #cbd5e1;
-        cursor: pointer; transition: all 0.2s ease; display: flex; align-items: center; gap: 8px;
-    }
-    .company-pill:hover { border-color: var(--bain-navy); transform: translateY(-1px); }
-    .company-pill.active {
-        background: var(--bain-navy); color: white; border-color: var(--bain-navy);
-        box-shadow: 0 4px 12px rgba(0,51,102,0.25);
-    }
-    .company-pill.custom { border-style: dashed; border-color: #0066CC; color: #0066CC; }
-    .company-pill.custom.active { background: #0066CC; color: white; border-style: solid; }
-    .add-pill-btn {
-        background: #f1f5f9; border: 2px dashed #94a3b8; color: #475569;
-        padding: 8px 16px; border-radius: 24px; font-size: 13px; font-weight: 700;
+        display: inline-flex; align-items: center; gap: 7px;
+        padding: 7px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+        background: var(--slate-50); color: var(--slate-700); border: 1.5px solid var(--slate-200);
         cursor: pointer; transition: all 0.2s ease;
     }
-    .add-pill-btn:hover { background: #e2e8f0; border-color: var(--bain-navy); color: var(--bain-navy); }
+    .company-pill:hover { border-color: var(--navy-600); color: var(--navy-600); background: white; }
+    .company-pill.active {
+        background: var(--navy-800); color: white; border-color: var(--navy-800);
+        box-shadow: 0 4px 12px rgba(11, 25, 44, 0.2);
+    }
+    .company-pill.active .pill-ticker { background: rgba(255, 255, 255, 0.2); color: white; }
+    .pill-ticker {
+        font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 700;
+        background: var(--slate-200); color: var(--slate-600); padding: 2px 6px; border-radius: 4px;
+    }
+    .company-pill.custom { border-style: dashed; border-color: var(--navy-500); color: var(--navy-500); }
+    .company-pill.custom.active { background: var(--navy-500); color: white; border-style: solid; }
 
-    /* Presentation Slide Deck */
-    .slide {
-        width: 1100px; min-height: 820px; margin: 24px auto 40px;
-        background: white; border-radius: 6px;
-        box-shadow: 0 6px 24px rgba(0,0,0,0.08);
-        padding: 44px 54px;
-        page-break-after: always;
-        position: relative;
+    .btn-add-target {
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 7px 14px; border-radius: 20px; font-size: 12.5px; font-weight: 700;
+        background: #F8FAFC; color: var(--navy-600); border: 1.5px dashed var(--slate-300);
+        cursor: pointer; transition: all 0.2s ease;
+    }
+    .btn-add-target:hover { background: #EEF2F6; border-color: var(--navy-600); }
+
+    /* View Controls (Tabs / Presentation Mode) */
+    .view-stepper {
+        display: flex; align-items: center; gap: 4px;
+        background: var(--slate-100); padding: 4px; border-radius: 8px; border: 1px solid var(--slate-200);
+    }
+    .step-btn {
+        padding: 6px 14px; border-radius: 6px; font-size: 12px; font-weight: 600;
+        background: transparent; color: var(--slate-600); border: none; cursor: pointer;
+        transition: all 0.15s ease;
+    }
+    .step-btn:hover { color: var(--navy-900); }
+    .step-btn.active {
+        background: white; color: var(--navy-900); font-weight: 700;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.08);
     }
 
-    .slide-header {
+    /* ═══════════════════════════════════════════════════════ */
+    /* PRESENTATION CONTAINER & SLIDES                         */
+    /* ═══════════════════════════════════════════════════════ */
+    .presentation-container {
+        max-width: 1180px; margin: 30px auto 60px; padding: 0 20px;
+    }
+
+    .deck-slide {
+        background: white; border-radius: 12px;
+        border: 1px solid var(--slate-200);
+        box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
+        padding: 44px 50px; margin-bottom: 36px;
+        position: relative; overflow: hidden;
+    }
+    .deck-slide::before {
+        content: ""; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+        background: linear-gradient(90deg, var(--bain-red) 0%, #E63946 50%, var(--navy-600) 100%);
+    }
+
+    .slide-top-bar {
+        display: flex; justify-content: space-between; align-items: flex-start;
+        padding-bottom: 16px; margin-bottom: 24px; border-bottom: 1px solid var(--slate-200);
+    }
+    .slide-heading-wrap h2 { font-size: 24px; font-weight: 800; color: var(--navy-800); letter-spacing: -0.5px; }
+    .slide-heading-wrap p { font-size: 13px; color: var(--slate-500); margin-top: 3px; }
+    .confidential-tag {
+        font-size: 10px; font-weight: 800; color: white; background: var(--bain-red);
+        padding: 4px 10px; border-radius: 4px; letter-spacing: 1.2px; text-transform: uppercase;
+    }
+
+    .slide-footer-bar {
+        margin-top: 32px; padding-top: 14px; border-top: 1px solid var(--slate-200);
         display: flex; justify-content: space-between; align-items: center;
-        border-bottom: 3px solid var(--bain-red); padding-bottom: 14px;
-        margin-bottom: 24px;
+        font-size: 11px; color: var(--slate-400);
     }
-    .slide-header h1 { font-size: 24px; color: var(--bain-navy); font-weight: 800; letter-spacing: -0.5px; }
-    .slide-header .tag {
-        font-size: 11px; font-weight: 700; color: white; background: var(--bain-red);
-        padding: 4px 12px; border-radius: 3px; text-transform: uppercase; letter-spacing: 1px;
+    .slide-num-pill {
+        font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700;
+        background: var(--slate-100); color: var(--slate-600); padding: 3px 8px; border-radius: 4px;
     }
 
-    .slide-number { position: absolute; bottom: 20px; right: 40px; font-size: 11px; color: var(--bain-grey); font-weight: 600; }
-    .slide-footer { position: absolute; bottom: 20px; left: 54px; font-size: 10px; color: #888; font-style: italic; }
-
-    h2 { font-size: 17px; color: var(--bain-navy); margin: 20px 0 10px; font-weight: 700; }
-    h3 { font-size: 13px; color: var(--bain-red); margin: 14px 0 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
-    p { font-size: 13px; line-height: 1.6; color: #333; margin-bottom: 12px; }
-
-    /* KPI Grid */
-    .kpi-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin: 16px 0 20px; }
-    .kpi-card {
-        background: var(--bain-light); border-radius: 6px; padding: 14px 16px;
-        border-left: 4px solid var(--bain-navy); text-align: center;
+    /* ═══════════════════════════════════════════════════════ */
+    /* KPI METRIC CARDS                                        */
+    /* ═══════════════════════════════════════════════════════ */
+    .kpi-row {
+        display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px;
     }
-    .kpi-card.red { border-left-color: var(--bain-red); }
-    .kpi-card.green { border-left-color: var(--bain-green); }
-    .kpi-card.blue { border-left-color: var(--bain-blue); }
-    .kpi-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--bain-grey); font-weight: 600; }
-    .kpi-value { font-size: 22px; font-weight: 800; color: var(--bain-navy); margin-top: 4px; }
-    .kpi-card.red .kpi-value { color: var(--bain-red); }
-    .kpi-card.green .kpi-value { color: var(--bain-green); }
-
-    /* Tables */
-    table { width: 100%; border-collapse: collapse; font-size: 12px; margin: 12px 0; }
-    th { background: var(--bain-navy); color: white; padding: 7px 10px; text-align: right; font-weight: 600; font-size: 11px; }
-    th:first-child { text-align: left; }
-    td { padding: 6px 10px; text-align: right; border-bottom: 1px solid #eee; }
-    td:first-child { text-align: left; font-weight: 500; }
-    tr:hover { background: #f8f9fa; }
-    .row-highlight { background: #E8F0FE; font-weight: 700; }
-
-    /* Charts Row */
-    .chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 18px 0; }
-    .chart-box {
-        background: white; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px;
-        position: relative;
+    .kpi-card-modern {
+        background: linear-gradient(180deg, #FFFFFF 0%, var(--slate-50) 100%);
+        border: 1px solid var(--slate-200); border-radius: 10px; padding: 18px 20px;
+        position: relative; transition: all 0.2s ease;
     }
-    .chart-box-title { font-size: 12px; font-weight: 700; color: var(--bain-navy); margin-bottom: 10px; }
-    .chart-svg { width: 100%; height: 210px; }
+    .kpi-card-modern:hover { transform: translateY(-2px); box-shadow: 0 8px 16px rgba(0,0,0,0.04); }
+    .kpi-card-modern.accent-red { border-top: 3px solid var(--bain-red); }
+    .kpi-card-modern.accent-green { border-top: 3px solid var(--emerald-500); }
+    .kpi-card-modern.accent-navy { border-top: 3px solid var(--navy-600); }
+    .kpi-card-modern.accent-blue { border-top: 3px solid var(--navy-500); }
 
-    /* Verdict Banner */
-    .verdict-box {
-        background: #F8F9FA; border-radius: 8px; padding: 18px 24px; margin: 16px 0; text-align: center;
-        border: 2px solid #ccc; transition: all 0.3s ease;
+    .kpi-title { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.8px; color: var(--slate-400); }
+    .kpi-num { font-size: 26px; font-weight: 800; color: var(--navy-900); margin: 6px 0 2px; letter-spacing: -0.5px; }
+    .kpi-card-modern.accent-red .kpi-num { color: var(--bain-red); }
+    .kpi-card-modern.accent-green .kpi-num { color: var(--emerald-500); }
+    .kpi-sub { font-size: 11px; color: var(--slate-500); font-weight: 500; }
+
+    /* ═══════════════════════════════════════════════════════ */
+    /* DATA TABLES                                             */
+    /* ═══════════════════════════════════════════════════════ */
+    .table-container {
+        border: 1px solid var(--slate-200); border-radius: 8px; overflow: hidden; margin: 16px 0 24px;
     }
-    .verdict-box.undervalued { background: #E8F5E9; border-color: var(--bain-green); }
-    .verdict-box.overvalued { background: #FFEBEE; border-color: var(--bain-red); }
-    .verdict-box h2 { margin: 0 0 4px; font-size: 21px; }
-    .verdict-box.undervalued h2, .verdict-box.undervalued p { color: var(--bain-green); }
-    .verdict-box.overvalued h2, .verdict-box.overvalued p { color: var(--bain-red); }
-    .verdict-box p { font-size: 14px; font-weight: 600; margin: 0; }
-
-    /* Recommendation Cards */
-    .rec-box {
-        background: var(--bain-light); border-radius: 6px; padding: 16px 20px;
-        margin: 12px 0; border-left: 5px solid var(--bain-red);
+    .mbb-table { width: 100%; border-collapse: collapse; font-size: 12.5px; text-align: right; }
+    .mbb-table th {
+        background: var(--navy-800); color: white; font-weight: 600; font-size: 11px;
+        padding: 9px 12px; letter-spacing: 0.3px; border-bottom: 2px solid rgba(255,255,255,0.1);
     }
-    .rec-box h3 { color: var(--bain-navy); margin: 0 0 6px; }
-    .rec-box p { margin: 0; font-size: 12.5px; }
+    .mbb-table th:first-child, .mbb-table td:first-child { text-align: left; }
+    .mbb-table td { padding: 8px 12px; border-bottom: 1px solid var(--slate-200); color: var(--slate-700); }
+    .mbb-table tbody tr:nth-child(even) { background: #FAFBFD; }
+    .mbb-table tbody tr:hover { background: #F1F5F9; }
+    .row-bold { font-weight: 700; color: var(--navy-900) !important; background: #EEF2F6 !important; }
+    .tag-badge {
+        font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 600;
+        padding: 2px 7px; border-radius: 4px; display: inline-block;
+    }
+    .tag-green { background: var(--emerald-100); color: #065F46; }
+    .tag-red { background: var(--rose-100); color: #991B1B; }
 
-    /* Sensitivity Table */
-    .sens-table td { text-align: center; font-family: monospace; font-size: 11px; padding: 6px 4px; }
-    .sens-table th { text-align: center; font-size: 10.5px; }
-    .sens-cell-green { background: #dcfce7; color: #166534; font-weight: 700; }
-    .sens-cell-red { background: #fee2e2; color: #991b1b; font-weight: 700; }
-    .sens-cell-base { background: #fef08a; color: #854d0e; font-weight: 800; border: 2px solid #ca8a04; }
+    /* ═══════════════════════════════════════════════════════ */
+    /* CHART PANELS                                            */
+    /* ═══════════════════════════════════════════════════════ */
+    .charts-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0; }
+    .chart-panel {
+        background: white; border: 1px solid var(--slate-200); border-radius: 10px;
+        padding: 18px 20px; position: relative; box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+    }
+    .chart-panel-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .chart-panel-title { font-size: 13px; font-weight: 700; color: var(--navy-800); }
+    .chart-panel-badge { font-size: 10px; color: var(--slate-400); font-weight: 600; text-transform: uppercase; }
+    .svg-canvas { width: 100%; height: 215px; }
 
-    /* Modal Styling */
+    /* ═══════════════════════════════════════════════════════ */
+    /* INTERACTIVE WHAT-IF SCENARIO SANDBOX (SLIDE 2)          */
+    /* ═══════════════════════════════════════════════════════ */
+    .sandbox-panel {
+        background: linear-gradient(135deg, #0A192F 0%, #172A45 100%);
+        color: white; border-radius: 10px; padding: 22px 26px; margin: 20px 0;
+        box-shadow: 0 10px 25px -5px rgba(10, 25, 47, 0.4);
+    }
+    .sandbox-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .sandbox-title { font-size: 14px; font-weight: 800; letter-spacing: -0.2px; display: flex; align-items: center; gap: 8px; }
+    .sandbox-badge { background: var(--bain-red); font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; }
+
+    .sandbox-controls { display: grid; grid-template-columns: 1fr 1fr 1.2fr; gap: 20px; align-items: center; }
+    .slider-box { display: flex; flex-direction: column; gap: 6px; }
+    .slider-label-row { display: flex; justify-content: space-between; font-size: 11.5px; font-weight: 600; color: var(--slate-300); }
+    .slider-val { font-family: 'JetBrains Mono', monospace; color: #38BDF8; font-weight: 700; }
+    input[type=range] {
+        width: 100%; height: 6px; border-radius: 3px; background: rgba(255,255,255,0.2);
+        outline: none; -webkit-appearance: none; cursor: pointer;
+    }
+    input[type=range]::-webkit-slider-thumb {
+        -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%;
+        background: #38BDF8; box-shadow: 0 0 8px #38BDF8; cursor: pointer;
+    }
+
+    .sandbox-result-box {
+        background: rgba(255, 255, 255, 0.07); border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 8px; padding: 14px 18px; text-align: center;
+    }
+    .result-price-label { font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.8px; color: var(--slate-300); font-weight: 600; }
+    .result-price-num { font-size: 24px; font-weight: 800; color: white; margin: 4px 0 2px; }
+    .result-upside-badge { font-size: 12px; font-weight: 700; padding: 2px 8px; border-radius: 4px; display: inline-block; }
+
+    /* Verdict Card */
+    .verdict-banner {
+        border-radius: 10px; padding: 18px 24px; margin-bottom: 20px; text-align: center;
+        transition: all 0.3s ease; border: 1.5px solid transparent;
+    }
+    .verdict-banner.overvalued { background: #FFF1F2; border-color: #FECDD3; color: #9F1239; }
+    .verdict-banner.undervalued { background: #ECFDF5; border-color: #A7F3D0; color: #065F46; }
+    .verdict-banner h3 { font-size: 22px; font-weight: 800; margin-bottom: 4px; }
+    .verdict-banner p { font-size: 14px; font-weight: 600; margin: 0; }
+
+    /* Strategic Recommendation Panels (Slide 3) */
+    .rec-card {
+        background: var(--slate-50); border: 1px solid var(--slate-200); border-left: 5px solid var(--bain-red);
+        border-radius: 8px; padding: 18px 22px; margin-bottom: 16px;
+    }
+    .rec-card h4 { font-size: 14px; color: var(--navy-800); font-weight: 700; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+    .rec-card p { font-size: 13px; line-height: 1.6; color: var(--slate-700); margin: 0; }
+
+    /* ═══════════════════════════════════════════════════════ */
+    /* ADD TARGET MODAL                                        */
+    /* ═══════════════════════════════════════════════════════ */
     .modal-backdrop {
-        display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6);
-        z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(4px);
+        display: none; position: fixed; inset: 0; background: rgba(7, 16, 30, 0.7);
+        z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(6px);
+        animation: fadeIn 0.2s ease;
     }
     .modal-backdrop.open { display: flex; }
     .modal-card {
-        background: white; width: 680px; max-height: 90vh; overflow-y: auto;
-        border-radius: 8px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); padding: 32px 36px;
+        background: white; width: 720px; max-height: 90vh; overflow-y: auto;
+        border-radius: 14px; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); padding: 32px 36px;
     }
     .modal-header {
         display: flex; justify-content: space-between; align-items: center;
-        border-bottom: 2px solid var(--bain-red); padding-bottom: 12px; margin-bottom: 20px;
+        border-bottom: 2px solid var(--bain-red); padding-bottom: 14px; margin-bottom: 20px;
     }
-    .modal-header h2 { margin: 0; font-size: 20px; color: var(--bain-navy); }
-    .modal-close { background: none; border: none; font-size: 24px; cursor: pointer; color: #64748b; }
-    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
-    .form-group { display: flex; flex-direction: column; gap: 4px; }
+    .modal-header h3 { font-size: 19px; font-weight: 800; color: var(--navy-900); }
+    .btn-close { background: none; border: none; font-size: 26px; cursor: pointer; color: var(--slate-400); }
+    .btn-close:hover { color: var(--slate-700); }
+
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .form-group { display: flex; flex-direction: column; gap: 5px; }
     .form-group.full { grid-column: span 2; }
-    .form-group label { font-size: 11px; font-weight: 700; color: #475569; text-transform: uppercase; }
+    .form-group label { font-size: 11px; font-weight: 700; text-transform: uppercase; color: var(--slate-600); }
     .form-group input, .form-group select, .form-group textarea {
-        padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 4px; font-size: 13px; font-family: inherit;
+        padding: 9px 12px; border: 1.5px solid var(--slate-300); border-radius: 6px;
+        font-size: 13px; font-family: inherit; transition: all 0.15s ease;
     }
     .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
-        border-color: var(--bain-navy); outline: none; box-shadow: 0 0 0 2px rgba(0,51,102,0.15);
+        border-color: var(--navy-600); outline: none; box-shadow: 0 0 0 3px rgba(0, 51, 102, 0.12);
     }
-    .form-actions { display: flex; justify-content: flex-end; gap: 10px; margin-top: 20px; }
+    .modal-footer { display: flex; justify-content: space-between; align-items: center; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--slate-200); }
+
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
     @media print {
-        .top-nav, .switcher-container, .modal-backdrop { display: none !important; }
+        .top-header, .control-ribbon, .sandbox-panel, .modal-backdrop { display: none !important; }
         body { background: white; }
-        .slide { box-shadow: none; margin: 0; width: 100%; page-break-after: always; padding: 24px; }
+        .deck-slide { box-shadow: none; border: none; padding: 20px 0; margin: 0; page-break-after: always; width: 100%; }
     }
 </style>
 </head>
 <body>
 
 <!-- ═══════════════════════════════════════════════════════ -->
-<!-- TOP STICKY PLATFORM HEADER                            -->
+<!-- TOP PLATFORM BAR                                        -->
 <!-- ═══════════════════════════════════════════════════════ -->
-<div class="top-nav">
-    <div class="top-nav-brand">
-        <span class="bain-logo-badge">BAIN &amp; COMPANY</span>
-        <span class="top-nav-title">M&amp;A Valuation &amp; Corporate Strategy Intelligence Platform</span>
-    </div>
-    <div class="nav-actions">
-        <a id="downloadModelBtn" href="output/valuation_model.xlsx" download class="btn btn-green">📊 Download Excel Model</a>
-        <a href="https://github.com/nidhiatwork01-cmyk/-Tesla-Valuation-M-A-Strategic-Analysis-project" target="_blank" class="btn btn-outline">📂 GitHub Repo</a>
-        <button onclick="window.print()" class="btn btn-red">🖨️ Export PDF / Print</button>
-    </div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- COMPANY SWITCHER BAR                                  -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="switcher-container">
-    <div class="company-pills" id="companyPillsContainer">
-        <!-- Injected via JavaScript -->
-    </div>
-    <button class="add-pill-btn" onclick="openAddModal()">➕ Add Custom Target Company</button>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 1 — SITUATION OVERVIEW                          -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide" id="slide1">
-    <div class="slide-header">
-        <h1 id="slide1Title">Tesla, Inc. (TSLA) — Situation Overview</h1>
-        <span class="tag">Confidential</span>
-    </div>
-
-    <p id="slide1Overview">Company overview description...</p>
-
-    <div class="kpi-grid">
-        <div class="kpi-card">
-            <div class="kpi-label">Market Capitalization</div>
-            <div class="kpi-value" id="kpiMarketCap">$950B</div>
-        </div>
-        <div class="kpi-card red">
-            <div class="kpi-label">Revenue CAGR (4-Year)</div>
-            <div class="kpi-value" id="kpiCAGR">20.3%</div>
-        </div>
-        <div class="kpi-card">
-            <div class="kpi-label">FY2025E Revenue</div>
-            <div class="kpi-value" id="kpiLatestRev">$112.8B</div>
-        </div>
-        <div class="kpi-card green">
-            <div class="kpi-label">Gross Margin (Latest)</div>
-            <div class="kpi-value" id="kpiGrossMargin">22.5%</div>
+<header class="top-header">
+    <div class="brand-section">
+        <span class="bain-emblem">BAIN &amp; CO</span>
+        <div class="brand-text">
+            <h1>M&amp;A Valuation &amp; Strategic Due Diligence Platform</h1>
+            <p><span class="pulse-dot"></span> Institutional Private Equity &amp; Corporate Strategy Intelligence</p>
         </div>
     </div>
+    <div class="header-actions">
+        <a id="downloadModelBtn" href="output/valuation_model.xlsx" download class="nav-btn nav-btn-green">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download Excel Model
+        </a>
+        <a href="https://github.com/nidhiatwork01-cmyk/-Tesla-Valuation-M-A-Strategic-Analysis-project" target="_blank" class="nav-btn nav-btn-glass">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0 0 24 12c0-6.63-5.37-12-12-12z"/></svg>
+            GitHub
+        </a>
+        <button onclick="window.print()" class="nav-btn nav-btn-red">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+            Export PDF
+        </button>
+    </div>
+</header>
 
-    <h2>5-Year Financial Trajectory &amp; Operating Performance</h2>
-    <table>
-        <thead>
-            <tr>
-                <th>Fiscal Year</th>
-                <th id="thRev">Revenue</th>
-                <th>Gross Margin %</th>
-                <th id="thEbitda">EBITDA</th>
-                <th>EBITDA Margin %</th>
-                <th id="thNetInc">Net Income</th>
-                <th id="thFcf">Free Cash Flow</th>
-            </tr>
-        </thead>
-        <tbody id="histTableBody">
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- CONTROL RIBBON (SWITCHER & VIEW MODES)                  -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="control-ribbon">
+    <div class="ribbon-inner">
+        <div class="pills-group" id="companyPillsContainer">
             <!-- Injected via JavaScript -->
-        </tbody>
-    </table>
-
-    <div class="chart-row">
-        <div class="chart-box">
-            <div class="chart-box-title">Revenue ($M) &amp; Year-over-Year Growth Rate</div>
-            <svg id="svgRevChart" class="chart-svg" viewBox="0 0 480 200"></svg>
         </div>
-        <div class="chart-box">
-            <div class="chart-box-title">Operating Profitability Margin Trajectory (%)</div>
-            <svg id="svgMarginChart" class="chart-svg" viewBox="0 0 480 200"></svg>
+
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <button class="btn-add-target" onclick="openAddModal()">
+                <span>➕</span> Add Custom Target
+            </button>
+            <div class="view-stepper">
+                <button class="step-btn active" onclick="scrollToSlide('slide1')">1. Situation</button>
+                <button class="step-btn" onclick="scrollToSlide('slide2')">2. Valuation</button>
+                <button class="step-btn" onclick="scrollToSlide('slide3')">3. Strategy</button>
+            </div>
         </div>
     </div>
-
-    <h3>Key Operational Insights</h3>
-    <p id="pOpInsight">Highlighting operational inflection and unit economics...</p>
-
-    <div class="slide-footer"><span id="footerCompName">Tesla, Inc.</span> — Strategic Due Diligence &amp; Valuation | Prepared for Bain &amp; Company Case Team</div>
-    <div class="slide-number">1 / 3</div>
 </div>
 
 <!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 2 — VALUATION SUMMARY                           -->
+<!-- PRESENTATION CONTAINER                                  -->
 <!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide" id="slide2">
-    <div class="slide-header">
-        <h1 id="slide2Title">Valuation Summary — DCF &amp; Comparable Benchmark</h1>
-        <span class="tag">Confidential</span>
-    </div>
+<main class="presentation-container">
 
-    <div class="verdict-box" id="verdictBox">
-        <h2 id="verdictPrice">DCF Implied Price: $61.02 per share</h2>
-        <p id="verdictDelta">Target appears OVERVALUED by 79.3% vs market price of $295.00</p>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-        <div>
-            <h3>DCF Model Mechanics</h3>
-            <table>
-                <tr><td>WACC (CAPM Derived)</td><td id="dcfWacc">9.53%</td></tr>
-                <tr><td>Terminal Growth Rate (g)</td><td id="dcfTermG">2.50%</td></tr>
-                <tr><td>PV of Projected 5Y Cash Flows</td><td id="dcfPvFcf">$35.8B</td></tr>
-                <tr><td>PV of Terminal Value (Gordon Growth)</td><td id="dcfPvTv">$129.6B</td></tr>
-                <tr class="row-highlight"><td><strong>Enterprise Value</strong></td><td id="dcfEv"><strong>$165.5B</strong></td></tr>
-                <tr><td>Net Cash / (Debt) Position</td><td id="dcfNetDebt">+$31.0B</td></tr>
-                <tr class="row-highlight"><td><strong>Equity Value</strong></td><td id="dcfEqVal"><strong>$196.5B</strong></td></tr>
-            </table>
+    <!-- ─────────────────────────────────────────────────── -->
+    <!-- SLIDE 1 — SITUATION OVERVIEW                        -->
+    <!-- ─────────────────────────────────────────────────── -->
+    <section class="deck-slide" id="slide1">
+        <div class="slide-top-bar">
+            <div class="slide-heading-wrap">
+                <h2 id="slide1Title">Tesla, Inc. (TSLA) — Situation Overview</h2>
+                <p id="slide1Subtitle">Commercial Trajectory, 5-Year Financial Statements &amp; Operating Drivers</p>
+            </div>
+            <span class="confidential-tag">Bain Confidential</span>
         </div>
-        <div>
-            <h3>Peer Multiples Benchmark</h3>
-            <table>
+
+        <p id="slide1Overview" style="font-size: 13.5px; line-height: 1.65; color: var(--slate-700); margin-bottom: 22px;">
+            Company overview description...
+        </p>
+
+        <!-- KPI Metrics Grid -->
+        <div class="kpi-row">
+            <div class="kpi-card-modern accent-navy">
+                <div class="kpi-title">Market Capitalization</div>
+                <div class="kpi-num" id="kpiMarketCap">$950B</div>
+                <div class="kpi-sub">Public Equity Market Value</div>
+            </div>
+            <div class="kpi-card-modern accent-red">
+                <div class="kpi-title">Revenue CAGR (4Y)</div>
+                <div class="kpi-num" id="kpiCAGR">20.3%</div>
+                <div class="kpi-sub">FY2021 → FY2025E Expansion</div>
+            </div>
+            <div class="kpi-card-modern accent-blue">
+                <div class="kpi-title">Latest Revenue (FY25E)</div>
+                <div class="kpi-num" id="kpiLatestRev">$112.8B</div>
+                <div class="kpi-sub">Consensus Forecast Run-Rate</div>
+            </div>
+            <div class="kpi-card-modern accent-green">
+                <div class="kpi-title">Gross Margin (Latest)</div>
+                <div class="kpi-num" id="kpiGrossMargin">22.5%</div>
+                <div class="kpi-sub">Post-Price War Inflection</div>
+            </div>
+        </div>
+
+        <!-- 5-Year Financial Statements Table -->
+        <div class="table-container">
+            <table class="mbb-table">
                 <thead>
-                    <tr><th>Peer Company</th><th>EV/Revenue</th><th>EV/EBITDA</th><th>P/E</th></tr>
+                    <tr>
+                        <th>Fiscal Year</th>
+                        <th>Revenue</th>
+                        <th>Gross Margin</th>
+                        <th>EBITDA</th>
+                        <th>EBITDA Margin</th>
+                        <th>Net Income</th>
+                        <th>Free Cash Flow</th>
+                    </tr>
                 </thead>
-                <tbody id="compsTableBody">
+                <tbody id="histTableBody">
                     <!-- Injected via JavaScript -->
                 </tbody>
             </table>
         </div>
-    </div>
 
-    <div class="chart-row">
-        <div class="chart-box">
-            <div class="chart-box-title">Enterprise Value to Equity Value Bridge ($B)</div>
-            <svg id="svgWaterfallChart" class="chart-svg" viewBox="0 0 480 200"></svg>
-        </div>
-        <div class="chart-box">
-            <div class="chart-box-title">Valuation Sensitivity Matrix (Rev Growth Δ vs WACC)</div>
-            <div style="overflow-x: auto;">
-                <table class="sens-table" id="sensTable">
-                    <!-- Injected via JavaScript -->
-                </table>
+        <!-- Charts Grid 1 -->
+        <div class="charts-grid-2">
+            <div class="chart-panel">
+                <div class="chart-panel-header">
+                    <span class="chart-panel-title">Revenue &amp; YoY Growth Trajectory</span>
+                    <span class="chart-panel-badge">Historical + Estimate</span>
+                </div>
+                <svg id="svgRevChart" class="svg-canvas" viewBox="0 0 500 215"></svg>
+            </div>
+            <div class="chart-panel">
+                <div class="chart-panel-header">
+                    <span class="chart-panel-title">Operating Profitability Margin Recovery</span>
+                    <span class="chart-panel-badge">Gross vs. EBITDA %</span>
+                </div>
+                <svg id="svgMarginChart" class="svg-canvas" viewBox="0 0 500 215"></svg>
             </div>
         </div>
-    </div>
 
-    <div class="slide-footer"><span id="footerCompName2">Tesla, Inc.</span> — Strategic Due Diligence &amp; Valuation | Prepared for Bain &amp; Company Case Team</div>
-    <div class="slide-number">2 / 3</div>
-</div>
+        <div style="background: var(--slate-50); border-left: 4px solid var(--navy-600); border-radius: 6px; padding: 14px 18px; margin-top: 20px;">
+            <strong style="font-size: 12px; text-transform: uppercase; color: var(--navy-600); letter-spacing: 0.5px;">Key Operating Inflection Insight:</strong>
+            <p id="pOpInsight" style="font-size: 13px; color: var(--slate-700); margin: 4px 0 0; line-height: 1.6;">Highlighting unit economics...</p>
+        </div>
+
+        <div class="slide-footer-bar">
+            <div><span id="footerCompName1">Tesla, Inc.</span> | Bain &amp; Company Private Equity &amp; Strategy Practice</div>
+            <div class="slide-num-pill">SLIDE 1 / 3</div>
+        </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────────────── -->
+    <!-- SLIDE 2 — VALUATION & SENSITIVITY                   -->
+    <!-- ─────────────────────────────────────────────────── -->
+    <section class="deck-slide" id="slide2">
+        <div class="slide-top-bar">
+            <div class="slide-heading-wrap">
+                <h2 id="slide2Title">Valuation Summary — DCF &amp; Comparable Benchmark</h2>
+                <p>Intrinsic Value Bridge, Capital Structure Analysis &amp; Trading Multiples</p>
+            </div>
+            <span class="confidential-tag">Bain Confidential</span>
+        </div>
+
+        <!-- Dynamic Valuation Verdict Banner -->
+        <div class="verdict-banner" id="verdictBox">
+            <h3 id="verdictPrice">DCF Implied Price: $61.02 per share</h3>
+            <p id="verdictDelta">Target appears OVERVALUED by 79.3% vs market price of $295.00</p>
+        </div>
+
+        <!-- Interactive What-If Scenario Sandbox -->
+        <div class="sandbox-panel">
+            <div class="sandbox-header">
+                <div class="sandbox-title">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+                    Live "What-If" Sensitivity Sandbox
+                </div>
+                <span class="sandbox-badge">Real-Time Simulation</span>
+            </div>
+            <div class="sandbox-controls">
+                <div class="slider-box">
+                    <div class="slider-label-row">
+                        <span>Cost of Capital (WACC):</span>
+                        <span class="slider-val" id="sliderWaccVal">9.5%</span>
+                    </div>
+                    <input type="range" id="sliderWacc" min="6.0" max="16.0" step="0.1" value="9.5" oninput="handleSandboxChange()">
+                </div>
+                <div class="slider-box">
+                    <div class="slider-label-row">
+                        <span>Terminal Growth (g):</span>
+                        <span class="slider-val" id="sliderTermGVal">2.5%</span>
+                    </div>
+                    <input type="range" id="sliderTermG" min="1.5" max="6.0" step="0.1" value="2.5" oninput="handleSandboxChange()">
+                </div>
+                <div class="sandbox-result-box">
+                    <div class="result-price-label">Simulated Implied Share Price</div>
+                    <div class="result-price-num" id="sandboxPrice">$61.02</div>
+                    <span class="result-upside-badge" id="sandboxUpsideBadge">-79.3% Downside</span>
+                </div>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div>
+                <h4 style="font-size: 13px; font-weight: 700; color: var(--navy-800); margin-bottom: 8px;">DCF Valuation Build-Up</h4>
+                <div class="table-container" style="margin: 0;">
+                    <table class="mbb-table">
+                        <tr><td>WACC (Discount Rate)</td><td id="dcfWacc">9.53%</td></tr>
+                        <tr><td>Perpetual Growth Rate (g)</td><td id="dcfTermG">2.50%</td></tr>
+                        <tr><td>PV of Projected 5Y Cash Flows</td><td id="dcfPvFcf">$35.8B</td></tr>
+                        <tr><td>PV of Terminal Value (Gordon Growth)</td><td id="dcfPvTv">$129.6B</td></tr>
+                        <tr class="row-bold"><td>Enterprise Value (EV)</td><td id="dcfEv">$165.5B</td></tr>
+                        <tr><td>Net Cash / (Debt) Position</td><td id="dcfNetDebt">+$31.0B</td></tr>
+                        <tr class="row-bold"><td>Implied Equity Value</td><td id="dcfEqVal">$196.5B</td></tr>
+                    </table>
+                </div>
+            </div>
+            <div>
+                <h4 style="font-size: 13px; font-weight: 700; color: var(--navy-800); margin-bottom: 8px;">Comparable Trading Multiples Benchmark</h4>
+                <div class="table-container" style="margin: 0;">
+                    <table class="mbb-table">
+                        <thead>
+                            <tr><th>Peer Company</th><th>EV/Revenue</th><th>EV/EBITDA</th><th>P/E</th></tr>
+                        </thead>
+                        <tbody id="compsTableBody">
+                            <!-- Injected via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Grid 2 -->
+        <div class="charts-grid-2">
+            <div class="chart-panel">
+                <div class="chart-panel-header">
+                    <span class="chart-panel-title">Enterprise Value to Equity Value Bridge</span>
+                    <span class="chart-panel-badge">Waterfall Bridge</span>
+                </div>
+                <svg id="svgWaterfallChart" class="svg-canvas" viewBox="0 0 500 215"></svg>
+            </div>
+            <div class="chart-panel">
+                <div class="chart-panel-header">
+                    <span class="chart-panel-title">2D Valuation Sensitivity Matrix</span>
+                    <span class="chart-panel-badge">Rev Δ vs. WACC</span>
+                </div>
+                <div style="overflow-x: auto;">
+                    <table class="mbb-table" id="sensTable" style="margin: 0; font-size: 11px; text-align: center;">
+                        <!-- Injected via JavaScript -->
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="slide-footer-bar">
+            <div><span id="footerCompName2">Tesla, Inc.</span> | Bain &amp; Company Private Equity &amp; Strategy Practice</div>
+            <div class="slide-num-pill">SLIDE 2 / 3</div>
+        </div>
+    </section>
+
+    <!-- ─────────────────────────────────────────────────── -->
+    <!-- SLIDE 3 — STRATEGIC RECOMMENDATION                  -->
+    <!-- ─────────────────────────────────────────────────── -->
+    <section class="deck-slide" id="slide3">
+        <div class="slide-top-bar">
+            <div class="slide-heading-wrap">
+                <h2 id="slide3Title">Strategic Recommendation — The Bain Touch</h2>
+                <p>Commercial Catalyst Synthesis, Downside Risk Hedging &amp; Capital Allocation</p>
+            </div>
+            <span class="confidential-tag">Bain Confidential</span>
+        </div>
+
+        <div class="rec-card">
+            <h4>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--bain-red)" stroke-width="2.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                1. Intrinsic Valuation Verdict &amp; Market Perception
+            </h4>
+            <p id="recValuation">Valuation verdict text...</p>
+        </div>
+
+        <div class="rec-card">
+            <h4>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy-600)" stroke-width="2.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                2. High-Conviction Growth Catalysts
+            </h4>
+            <p id="recCatalysts">Growth catalysts text...</p>
+        </div>
+
+        <div class="rec-card">
+            <h4>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--amber-500)" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                3. Critical Strategic Risk &amp; Mitigation Framework
+            </h4>
+            <p id="recRisk">Key risk text...</p>
+        </div>
+
+        <div class="chart-panel" style="margin-top: 20px;">
+            <div class="chart-panel-header">
+                <span class="chart-panel-title">Free Cash Flow Generation &amp; Reinvestment Trajectory</span>
+                <span class="chart-panel-badge">Historical + Projected Runway</span>
+            </div>
+            <svg id="svgFcfChart" class="svg-canvas" style="height: 180px;" viewBox="0 0 800 170"></svg>
+        </div>
+
+        <div class="slide-footer-bar">
+            <div><span id="footerCompName3">Tesla, Inc.</span> | Bain &amp; Company Private Equity &amp; Strategy Practice</div>
+            <div class="slide-num-pill">SLIDE 3 / 3</div>
+        </div>
+    </section>
+
+</main>
 
 <!-- ═══════════════════════════════════════════════════════ -->
-<!-- SLIDE 3 — STRATEGIC RECOMMENDATION                    -->
-<!-- ═══════════════════════════════════════════════════════ -->
-<div class="slide" id="slide3">
-    <div class="slide-header">
-        <h1 id="slide3Title">Strategic Recommendation — The Bain Touch</h1>
-        <span class="tag">Confidential</span>
-    </div>
-
-    <div class="rec-box">
-        <h3>1. Valuation Outcome &amp; Market Perception</h3>
-        <p id="recValuation">Valuation outcome text...</p>
-    </div>
-
-    <div class="rec-box">
-        <h3>2. Strategic Growth Catalysts</h3>
-        <p id="recCatalysts">Growth catalysts text...</p>
-    </div>
-
-    <div class="rec-box">
-        <h3>3. Critical Strategic Risk &amp; Mitigation Framework</h3>
-        <p id="recRisk">Key risk and mitigation framework text...</p>
-    </div>
-
-    <div class="chart-box" style="margin-top: 16px;">
-        <div class="chart-box-title">Historical &amp; Projected Free Cash Flow Trajectory</div>
-        <svg id="svgFcfChart" class="chart-svg" style="height: 190px;" viewBox="0 0 800 180"></svg>
-    </div>
-
-    <div class="slide-footer"><span id="footerCompName3">Tesla, Inc.</span> — Strategic Due Diligence &amp; Valuation | Prepared for Bain &amp; Company Case Team</div>
-    <div class="slide-number">3 / 3</div>
-</div>
-
-<!-- ═══════════════════════════════════════════════════════ -->
-<!-- ADD CUSTOM COMPANY MODAL                              -->
+<!-- ADD CUSTOM TARGET MODAL                                 -->
 <!-- ═══════════════════════════════════════════════════════ -->
 <div class="modal-backdrop" id="addModal">
     <div class="modal-card">
         <div class="modal-header">
-            <h2>➕ Add Custom Target Company for Due Diligence</h2>
-            <button class="modal-close" onclick="closeAddModal()">&times;</button>
+            <h3>➕ Add Custom Target Company for Due Diligence</h3>
+            <button class="btn-close" onclick="closeAddModal()">&times;</button>
         </div>
         <form id="customCompanyForm" onsubmit="handleCustomSubmit(event)">
+            <div style="background: var(--slate-100); border-radius: 8px; padding: 10px 14px; margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                <span style="font-size: 12px; color: var(--slate-600); font-weight: 600;">Want to test in 1-click?</span>
+                <button type="button" class="nav-btn nav-btn-glass" style="background: var(--navy-800); font-size: 11px; padding: 4px 10px;" onclick="autofillSample()">
+                    ⚡ Load Sample: Nvidia (NVDA)
+                </button>
+            </div>
             <div class="form-grid">
                 <div class="form-group">
                     <label>Company Name</label>
-                    <input type="text" id="custName" required placeholder="e.g., Nvidia Corporation">
+                    <input type="text" id="custName" required placeholder="e.g. Nvidia Corporation">
                 </div>
                 <div class="form-group">
                     <label>Ticker Symbol</label>
-                    <input type="text" id="custTicker" required placeholder="e.g., NVDA">
+                    <input type="text" id="custTicker" required placeholder="e.g. NVDA">
                 </div>
                 <div class="form-group">
                     <label>Sector / Vertical</label>
-                    <input type="text" id="custSector" required placeholder="e.g., AI &amp; Accelerated Computing">
+                    <input type="text" id="custSector" required placeholder="e.g. AI Accelerators &amp; Semis">
                 </div>
                 <div class="form-group">
-                    <label>Currency Symbol</label>
+                    <label>Reporting Currency</label>
                     <select id="custCurrency">
                         <option value="$">USD ($)</option>
                         <option value="₹">INR (₹)</option>
@@ -417,44 +670,44 @@
                 </div>
                 <div class="form-group">
                     <label>Current Share Price</label>
-                    <input type="number" step="0.01" id="custPrice" required placeholder="e.g., 120.00">
+                    <input type="number" step="0.01" id="custPrice" required placeholder="e.g. 120.00">
                 </div>
                 <div class="form-group">
                     <label>Shares Outstanding (Millions)</label>
-                    <input type="number" step="1" id="custShares" required placeholder="e.g., 24500">
+                    <input type="number" step="1" id="custShares" required placeholder="e.g. 24500">
                 </div>
                 <div class="form-group">
                     <label>Latest FY Revenue (Millions)</label>
-                    <input type="number" step="1" id="custRev" required placeholder="e.g., 60922">
+                    <input type="number" step="1" id="custRev" required placeholder="e.g. 60922">
                 </div>
                 <div class="form-group">
                     <label>Historical Revenue CAGR (%)</label>
-                    <input type="number" step="0.1" id="custCagr" required placeholder="e.g., 54.2">
+                    <input type="number" step="0.1" id="custCagr" required placeholder="e.g. 54.2">
                 </div>
                 <div class="form-group">
                     <label>Gross Margin %</label>
-                    <input type="number" step="0.1" id="custGrossMargin" required placeholder="e.g., 72.7">
+                    <input type="number" step="0.1" id="custGrossMargin" required placeholder="e.g. 72.7">
                 </div>
                 <div class="form-group">
                     <label>EBITDA Margin %</label>
-                    <input type="number" step="0.1" id="custEbitdaMargin" required placeholder="e.g., 58.5">
+                    <input type="number" step="0.1" id="custEbitdaMargin" required placeholder="e.g. 58.5">
                 </div>
                 <div class="form-group">
-                    <label>Assumed WACC (%)</label>
-                    <input type="number" step="0.1" id="custWacc" required placeholder="e.g., 9.5">
+                    <label>Discount Rate / WACC (%)</label>
+                    <input type="number" step="0.1" id="custWacc" required placeholder="e.g. 9.5">
                 </div>
                 <div class="form-group">
-                    <label>Terminal Growth Rate (%)</label>
-                    <input type="number" step="0.1" id="custTermG" required placeholder="e.g., 3.0">
+                    <label>Terminal Growth Rate (g %)</label>
+                    <input type="number" step="0.1" id="custTermG" required placeholder="e.g. 3.0">
                 </div>
                 <div class="form-group full">
-                    <label>Strategic Executive Thesis / Catalysts</label>
-                    <textarea id="custThesis" rows="3" required placeholder="e.g., Market pricing reflects generational AI datacentre compute monopoly, with hyperscaler capex continuing to expand..."></textarea>
+                    <label>Strategic Executive Thesis &amp; Catalysts</label>
+                    <textarea id="custThesis" rows="3" required placeholder="e.g. Generational AI infrastructure monopoly with massive pricing power and expanding data center gross margins..."></textarea>
                 </div>
             </div>
-            <div class="form-actions">
-                <button type="button" class="btn btn-outline" style="color:#333; border:1px solid #ccc;" onclick="closeAddModal()">Cancel</button>
-                <button type="submit" class="btn btn-green">Run DCF &amp; Add Target</button>
+            <div class="modal-footer">
+                <button type="button" class="nav-btn nav-btn-glass" style="color: var(--slate-600); border: 1px solid var(--slate-300);" onclick="closeAddModal()">Cancel</button>
+                <button type="submit" class="nav-btn nav-btn-green">Run DCF &amp; Add to Platform</button>
             </div>
         </form>
     </div>
@@ -462,12 +715,13 @@
 
 <script>
 // ═══════════════════════════════════════════════════════════════════════════
-// MASTER PRE-LOADED DATASET (TSLA, ZOMATO, AAPL, BYD)
+// DATA LAYER (TSLA, ZOMATO, AAPL, BYD)
 // ═══════════════════════════════════════════════════════════════════════════
 const BASE_COMPANIES = {
   "TSLA": {
     company: "Tesla, Inc.",
     ticker: "TSLA",
+    icon: "🚗",
     sector: "Consumer Discretionary — Electric Vehicles & Clean Energy",
     currency: "$",
     unit_label: "$M",
@@ -482,13 +736,13 @@ const BASE_COMPANIES = {
     ebitda_margin: [17.5, 21.6, 14.0, 18.2, 19.3],
     net_income: [5519, 12556, 7928, 7091, 10200],
     fcf: [4983, 7566, 4379, 693, 4500],
-    net_debt: -31000, // Negative means net cash
+    net_debt: -31000,
     wacc: 0.0953,
     term_g: 0.025,
     growth_projections: [0.12, 0.10, 0.09, 0.08, 0.07],
     ebitda_targets: [0.193, 0.195, 0.198, 0.200, 0.205],
     comps: [
-      { name: "Tesla", ev_r: "8.1x", ev_eb: "42.3x", pe: "93.1x", is_self: true },
+      { name: "Tesla (Target)", ev_r: "8.1x", ev_eb: "42.3x", pe: "93.1x", is_self: true },
       { name: "BYD Co.", ev_r: "1.5x", ev_eb: "12.4x", pe: "18.5x" },
       { name: "Ford Motor", ev_r: "0.6x", ev_eb: "6.2x", pe: "8.3x" },
       { name: "Rivian", ev_r: "3.5x", ev_eb: "N/M", pe: "N/M" },
@@ -496,15 +750,16 @@ const BASE_COMPANIES = {
     ],
     operational_insight: "Gross margin expanded +4.3pp from the FY2023 EV price war trough (18.2%) to FY2025E (22.5%), powered by Austin/Berlin scale, 4680 cell ramp, and hypergrowth in high-margin utility energy storage.",
     thesis: {
-      verdict: "Overvalued by ~79% on a traditional DCF basis, reflecting immense tech-platform optionality baked into current multiples.",
-      catalysts: "1) Energy Storage: Megapack scaling >60% YoY with gross margins exceeding automotive. 2) FSD v13+ & Robotaxi: Asset-light recurring software subscription economics.",
+      verdict: "Overvalued by ~79% on traditional pure-hardware DCF, reflecting tech platform optionality (Megapack + FSD).",
+      catalysts: "1) Energy Storage: Megapack scaling >60% YoY with margins exceeding auto. 2) FSD v13+ & Robotaxi: High-margin recurring software revenues.",
       risk: "Intensifying price warfare from Chinese NEV OEMs (BYD, NIO) threatening global automotive margin recovery.",
-      mitigation: "Platform diversification into energy storage and software services reduces automotive revenue dependency from ~85% to ~65% by FY2030."
+      mitigation: "Platform diversification into energy storage and software services reduces auto revenue dependency from ~85% to ~65% by FY2030."
     }
   },
   "ZOMATO": {
     company: "Zomato Limited",
     ticker: "ZOMATO",
+    icon: "🛵",
     sector: "Consumer Internet — Food Delivery & Quick Commerce (Blinkit)",
     currency: "₹",
     unit_label: "₹ Cr",
@@ -519,13 +774,13 @@ const BASE_COMPANIES = {
     ebitda_margin: [-23.4, -20.2, -10.0, 5.5, 10.2],
     net_income: [-816, -1222, -971, 351, 1750],
     fcf: [-690, -930, -630, 480, 1750],
-    net_debt: -13550, // Net cash
+    net_debt: -13550,
     wacc: 0.128,
     term_g: 0.055,
     growth_projections: [0.35, 0.28, 0.22, 0.18, 0.15],
     ebitda_targets: [0.105, 0.125, 0.140, 0.155, 0.170],
     comps: [
-      { name: "Zomato", ev_r: "11.0x", ev_eb: "107.0x", pe: "136.0x", is_self: true },
+      { name: "Zomato (Target)", ev_r: "11.0x", ev_eb: "107.0x", pe: "136.0x", is_self: true },
       { name: "Swiggy", ev_r: "7.8x", ev_eb: "N/M", pe: "N/M" },
       { name: "DoorDash", ev_r: "4.1x", ev_eb: "28.5x", pe: "42.0x" },
       { name: "Meituan", ev_r: "2.4x", ev_eb: "16.8x", pe: "21.0x" },
@@ -534,14 +789,15 @@ const BASE_COMPANIES = {
     operational_insight: "Historic EBITDA profitability inflection from -₹467 Cr (FY21) to +₹2,100 Cr (FY25E), as Blinkit dark stores reach unit-level contribution margin positive territory.",
     thesis: {
       verdict: "Fairly valued to modest upside (~12%) as Blinkit quick-commerce compounding and advertising take-rates outpace street consensus.",
-      catalysts: "1) Blinkit Quick-Commerce Network: Expanding to 1,000+ dark stores, capturing high-ticket electronics, beauty, and festive retail. 2) High-Margin Ad Monetization: Ad take-rates expanding above 3.5% of GOV directly into operating profit.",
-      risk: "Intense hyperlocal delivery competition from well-capitalized entrants (Zepto, Swiggy Instamart) driving up delivery partner acquisition costs.",
-      mitigation: "Unmatched net cash cushion (₹13,800+ Cr) and regional warehouse density creating sustainable cost moats over single-category peers."
+      catalysts: "1) Blinkit Quick-Commerce Network: Expanding to 1,000+ dark stores, capturing high-ticket retail. 2) High-Margin Ad Monetization: Ad take-rates expanding above 3.5% of GOV.",
+      risk: "Intense hyperlocal delivery competition from well-capitalized entrants (Zepto, Swiggy Instamart).",
+      mitigation: "Unmatched net cash cushion (₹13,800+ Cr) and regional warehouse density creating sustainable cost moats."
     }
   },
   "AAPL": {
     company: "Apple Inc.",
     ticker: "AAPL",
+    icon: "🍎",
     sector: "Information Technology — Consumer Hardware & Ecosystem Services",
     currency: "$",
     unit_label: "$M",
@@ -562,7 +818,7 @@ const BASE_COMPANIES = {
     growth_projections: [0.065, 0.060, 0.055, 0.050, 0.045],
     ebitda_targets: [0.348, 0.352, 0.355, 0.358, 0.360],
     comps: [
-      { name: "Apple", ev_r: "8.5x", ev_eb: "24.5x", pe: "31.8x", is_self: true },
+      { name: "Apple (Target)", ev_r: "8.5x", ev_eb: "24.5x", pe: "31.8x", is_self: true },
       { name: "Microsoft", ev_r: "12.1x", ev_eb: "23.8x", pe: "33.2x" },
       { name: "Alphabet", ev_r: "6.2x", ev_eb: "17.5x", pe: "23.5x" },
       { name: "Amazon", ev_r: "3.1x", ev_eb: "16.2x", pe: "41.0x" },
@@ -571,7 +827,7 @@ const BASE_COMPANIES = {
     operational_insight: "Gross margin expansion to 46.2% driven by structural shift toward Services (>74% gross margin), compounding annual free cash flows beyond $110 Billion.",
     thesis: {
       verdict: "Fairly valued with defensible economic moat; supported by unprecedented $110B+ annual FCF conversion and ongoing share repurchases.",
-      catalysts: "1) Services Segment Compounding: High-margin digital services on track toward $100B+ annual run rate. 2) Apple Intelligence AI Cycle: On-device generative AI driving replacement cycle across 1.5B+ iPhone base.",
+      catalysts: "1) Services Segment Compounding: High-margin digital services on track toward $100B+ annual run rate. 2) Apple Intelligence AI Cycle: Replacement supercycle across installed base.",
       risk: "Regulatory antitrust litigation on App Store take-rates (EU DMA, US DOJ) and hardware deceleration in China.",
       mitigation: "Geographic diversification of manufacturing into India/Vietnam and expansion of enterprise subscriptions."
     }
@@ -579,6 +835,7 @@ const BASE_COMPANIES = {
   "BYD": {
     company: "BYD Company Limited",
     ticker: "1211.HK",
+    icon: "⚡",
     sector: "Consumer Discretionary — New Energy Vehicles & Batteries",
     currency: "¥",
     unit_label: "¥M",
@@ -593,13 +850,13 @@ const BASE_COMPANIES = {
     ebitda_margin: [8.8, 12.6, 12.9, 13.6, 14.4],
     net_income: [3045, 16626, 30041, 38500, 49500],
     fcf: [28126, 42020, 45725, 60000, 80000],
-    net_debt: -110000, // Large net cash
+    net_debt: -110000,
     wacc: 0.086,
     term_g: 0.025,
     growth_projections: [0.18, 0.15, 0.12, 0.10, 0.08],
     ebitda_targets: [0.145, 0.148, 0.150, 0.152, 0.155],
     comps: [
-      { name: "BYD", ev_r: "0.8x", ev_eb: "5.8x", pe: "16.5x", is_self: true },
+      { name: "BYD (Target)", ev_r: "0.8x", ev_eb: "5.8x", pe: "16.5x", is_self: true },
       { name: "Tesla", ev_r: "8.1x", ev_eb: "42.3x", pe: "93.1x" },
       { name: "Geely Auto", ev_r: "0.4x", ev_eb: "4.2x", pe: "9.8x" },
       { name: "Li Auto", ev_r: "1.2x", ev_eb: "8.5x", pe: "17.2x" },
@@ -608,42 +865,23 @@ const BASE_COMPANIES = {
     operational_insight: "Explosive volume scaling with gross margin climbing from 13.0% to 22.0% as proprietary Blade batteries and vertical component integration generate structural cost advantages.",
     thesis: {
       verdict: "Undervalued by ~25-30% against Western peers; trading at single-digit EV/EBITDA despite superior battery cost structure.",
-      catalysts: "1) High-Margin International Export Growth: Rapidly expanding footprint across Southeast Asia, Europe, and Latin America. 2) Blade Battery Merchant Supply: External supply contracts with third-party OEMs providing high-margin revenue.",
+      catalysts: "1) High-Margin International Export Growth: Rapidly expanding footprint across Europe and LatAm. 2) Blade Battery Merchant Supply: External supply contracts with third-party OEMs.",
       risk: "Western trade protectionism (EU and US EV tariffs) and hyper-competitive Chinese domestic price wars.",
       mitigation: "Aggressive localization of manufacturing plants in Hungary, Thailand, Brazil, and Turkey to bypass import tariffs."
     }
   }
 };
 
-// State management
 let companies = { ...BASE_COMPANIES };
 let currentCompanyKey = "TSLA";
 
-// Load custom companies from localStorage
-function loadCustomCompanies() {
-    try {
-        const saved = localStorage.getItem("bain_custom_companies");
-        if (saved) {
-            const parsed = JSON.parse(saved);
-            companies = { ...BASE_COMPANIES, ...parsed };
-        }
-    } catch(e) { console.error("Error loading custom companies", e); }
-}
-
-function saveCustomCompany(key, comp) {
-    try {
-        let customOnly = {};
-        const saved = localStorage.getItem("bain_custom_companies");
-        if (saved) customOnly = JSON.parse(saved);
-        customOnly[key] = comp;
-        localStorage.setItem("bain_custom_companies", JSON.stringify(customOnly));
-    } catch(e) { console.error("Error saving custom company", e); }
-}
-
 // ═══════════════════════════════════════════════════════════════════════════
-// DCF & VALUATION CALCULATION ENGINE
+// DCF ENGINE & WHAT-IF SIMULATION
 // ═══════════════════════════════════════════════════════════════════════════
-function calculateDCF(c) {
+function calculateDCF(c, overrideWacc = null, overrideTermG = null) {
+    const wacc = overrideWacc !== null ? overrideWacc : c.wacc;
+    const termG = overrideTermG !== null ? overrideTermG : c.term_g;
+
     const baseRev = c.revenue[c.revenue.length - 1];
     let projRevs = [];
     let curRev = baseRev;
@@ -667,12 +905,13 @@ function calculateDCF(c) {
 
     let pvFcfs = 0;
     for (let t = 0; t < projFcfs.length; t++) {
-        pvFcfs += projFcfs[t] / Math.pow(1 + c.wacc, t + 1);
+        pvFcfs += projFcfs[t] / Math.pow(1 + wacc, t + 1);
     }
 
     const lastFcf = projFcfs[projFcfs.length - 1];
-    const tv = (lastFcf * (1 + c.term_g)) / (c.wacc - c.term_g);
-    const pvTv = tv / Math.pow(1 + c.wacc, projFcfs.length);
+    const denom = Math.max(0.005, wacc - termG);
+    const tv = (lastFcf * (1 + termG)) / denom;
+    const pvTv = tv / Math.pow(1 + wacc, projFcfs.length);
 
     const ev = pvFcfs + pvTv;
     const eqVal = ev - c.net_debt;
@@ -687,8 +926,8 @@ function calculateDCF(c) {
     for (let rd of revDeltas) {
         let row = [];
         for (let wd of waccDeltas) {
-            const adjWacc = c.wacc + wd;
-            if (adjWacc <= c.term_g) {
+            const adjW = wacc + wd;
+            if (adjW <= termG) {
                 row.push(null);
                 continue;
             }
@@ -699,11 +938,11 @@ function calculateDCF(c) {
                 rCur *= (1 + c.growth_projections[t] + rd);
                 const eb = rCur * c.ebitda_targets[t];
                 const f = (eb * 0.79) - (rCur * 0.035);
-                fSum += f / Math.pow(1 + adjWacc, t + 1);
+                fSum += f / Math.pow(1 + adjW, t + 1);
                 lastF = f;
             }
-            const tVal = (lastF * (1 + c.term_g)) / (adjWacc - c.term_g);
-            const pTv = tVal / Math.pow(1 + adjWacc, c.growth_projections.length);
+            const tVal = (lastF * (1 + termG)) / (adjW - termG);
+            const pTv = tVal / Math.pow(1 + adjW, c.growth_projections.length);
             const eq = fSum + pTv - c.net_debt;
             row.push(eq / c.shares);
         }
@@ -711,76 +950,86 @@ function calculateDCF(c) {
     }
 
     return {
-        impliedPrice,
-        upside,
-        ev,
-        eqVal,
-        pvFcfs,
-        pvTv,
-        sensGrid,
-        revDeltas,
-        waccDeltas,
-        projRevs,
-        projFcfs
+        wacc, termG,
+        impliedPrice, upside,
+        ev, eqVal, pvFcfs, pvTv,
+        sensGrid, revDeltas, waccDeltas,
+        projRevs, projFcfs
     };
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
-// SVG CHART RENDERING (PURE CLIENT-SIDE)
+// SVG CHART RENDERING ENGINE (GRADIENTS & SMOOTH LINES)
 // ═══════════════════════════════════════════════════════════════════════════
 function renderCharts(c, dcf) {
+    const years = c.fiscal_years;
+
     // 1. Revenue & YoY Growth Chart
     const svgRev = document.getElementById("svgRevChart");
     const revs = c.revenue;
-    const maxRev = Math.max(...revs) * 1.25;
-    const years = c.fiscal_years;
-    let revHtml = `<line x1="40" y1="170" x2="460" y2="170" stroke="#cbd5e1" stroke-width="1"/>`;
+    const maxR = Math.max(...revs) * 1.25;
+    const spacing = 86;
+    const barW = 36;
+    let revHtml = `
+        <defs>
+            <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#0B192C"/>
+                <stop offset="100%" stop-color="#1E3E62"/>
+            </linearGradient>
+        </defs>
+        <line x1="35" y1="175" x2="480" y2="175" stroke="#E2E8F0" stroke-width="1.5"/>
+    `;
 
-    const barW = 38;
-    const spacing = 84;
-    let pts = [];
-
+    let growthPts = [];
     revs.forEach((r, i) => {
-        const x = 60 + i * spacing;
-        const h = (r / maxRev) * 130;
-        const y = 170 - h;
-        revHtml += `<rect x="${x - barW/2}" y="${y}" width="${barW}" height="${h}" fill="#003366" rx="2"/>`;
-        revHtml += `<text x="${x}" y="${y - 6}" font-size="10" font-weight="700" fill="#003366" text-anchor="middle">${c.currency}${(r > 999 ? (r/1000).toFixed(1) + 'B' : r + 'M')}</text>`;
-        revHtml += `<text x="${x}" y="186" font-size="10" fill="#64748b" text-anchor="middle">${years[i]}</text>`;
+        const x = 55 + i * spacing;
+        const h = (r / maxR) * 135;
+        const y = 175 - h;
+        revHtml += `<rect x="${x - barW/2}" y="${y}" width="${barW}" height="${h}" fill="url(#barGrad)" rx="3"/>`;
+        revHtml += `<text x="${x}" y="${y - 7}" font-size="10" font-weight="700" fill="#0B192C" text-anchor="middle">${c.currency}${(r > 999 ? (r/1000).toFixed(1) + 'B' : r + 'M')}</text>`;
+        revHtml += `<text x="${x}" y="193" font-size="10.5" font-weight="600" fill="#64748B" text-anchor="middle">${years[i]}</text>`;
 
         if (i > 0) {
             const growth = ((r - revs[i-1]) / revs[i-1]) * 100;
             const gy = 150 - Math.min(130, Math.max(10, growth * 1.5));
-            pts.push({ x, y: gy, val: growth.toFixed(1) + '%' });
+            growthPts.push({ x, y: gy, val: growth.toFixed(1) + '%' });
         }
     });
 
-    if (pts.length > 0) {
-        let lineD = `M ${pts[0].x} ${pts[0].y}`;
-        for (let i = 1; i < pts.length; i++) lineD += ` L ${pts[i].x} ${pts[i].y}`;
+    if (growthPts.length > 0) {
+        let lineD = `M ${growthPts[0].x} ${growthPts[0].y}`;
+        for (let i = 1; i < growthPts.length; i++) lineD += ` L ${growthPts[i].x} ${growthPts[i].y}`;
         revHtml += `<path d="${lineD}" fill="none" stroke="#CC0000" stroke-width="2.5"/>`;
-        pts.forEach(p => {
-            revHtml += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="#CC0000" stroke="white" stroke-width="1.5"/>`;
-            revHtml += `<text x="${p.x}" y="${p.y - 7}" font-size="9" font-weight="700" fill="#CC0000" text-anchor="middle">${p.val}</text>`;
+        growthPts.forEach(p => {
+            revHtml += `<circle cx="${p.x}" cy="${p.y}" r="4.5" fill="#CC0000" stroke="white" stroke-width="2"/>`;
+            revHtml += `<text x="${p.x}" y="${p.y - 8}" font-size="9" font-weight="800" fill="#CC0000" text-anchor="middle">${p.val}</text>`;
         });
     }
     svgRev.innerHTML = revHtml;
 
     // 2. Profitability Margins Chart
     const svgMargin = document.getElementById("svgMarginChart");
-    let marginHtml = `<line x1="40" y1="170" x2="460" y2="170" stroke="#cbd5e1" stroke-width="1"/>`;
+    let marginHtml = `
+        <defs>
+            <linearGradient id="gmGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#003366" stop-opacity="0.15"/>
+                <stop offset="100%" stop-color="#003366" stop-opacity="0.0"/>
+            </linearGradient>
+        </defs>
+        <line x1="35" y1="175" x2="480" y2="175" stroke="#E2E8F0" stroke-width="1.5"/>
+    `;
     const gm = c.gross_margin;
     const em = c.ebitda_margin;
     const maxM = Math.max(...gm, ...em, 30) * 1.25;
 
     let gmPts = [], emPts = [];
     years.forEach((yr, i) => {
-        const x = 60 + i * spacing;
-        const gy = 170 - (gm[i] / maxM) * 140;
-        const ey = 170 - (Math.max(0, em[i]) / maxM) * 140;
+        const x = 55 + i * spacing;
+        const gy = 175 - (gm[i] / maxM) * 140;
+        const ey = 175 - (Math.max(0, em[i]) / maxM) * 140;
         gmPts.push({ x, y: gy, v: gm[i] });
         emPts.push({ x, y: ey, v: em[i] });
-        marginHtml += `<text x="${x}" y="186" font-size="10" fill="#64748b" text-anchor="middle">${yr}</text>`;
+        marginHtml += `<text x="${x}" y="193" font-size="10.5" font-weight="600" fill="#64748B" text-anchor="middle">${yr}</text>`;
     });
 
     let gmD = `M ${gmPts[0].x} ${gmPts[0].y}`;
@@ -789,21 +1038,20 @@ function renderCharts(c, dcf) {
         gmD += ` L ${gmPts[i].x} ${gmPts[i].y}`;
         emD += ` L ${emPts[i].x} ${emPts[i].y}`;
     }
-    marginHtml += `<path d="${gmD}" fill="none" stroke="#003366" stroke-width="2.5"/>`;
-    marginHtml += `<path d="${emD}" fill="none" stroke="#CC0000" stroke-width="2.5"/>`;
+    marginHtml += `<path d="${gmD}" fill="none" stroke="#003366" stroke-width="2.8"/>`;
+    marginHtml += `<path d="${emD}" fill="none" stroke="#CC0000" stroke-width="2.8"/>`;
 
     gmPts.forEach(p => {
-        marginHtml += `<circle cx="${p.x}" cy="${p.y}" r="3.5" fill="#003366"/>`;
-        marginHtml += `<text x="${p.x}" y="${p.y - 6}" font-size="9" font-weight="700" fill="#003366" text-anchor="middle">${p.v}%</text>`;
+        marginHtml += `<circle cx="${p.x}" cy="${p.y}" r="4" fill="#003366" stroke="white" stroke-width="1.5"/>`;
+        marginHtml += `<text x="${p.x}" y="${p.y - 7}" font-size="9" font-weight="700" fill="#003366" text-anchor="middle">${p.v}%</text>`;
     });
     emPts.forEach(p => {
-        marginHtml += `<rect x="${p.x - 3}" y="${p.y - 3}" width="6" height="6" fill="#CC0000"/>`;
-        marginHtml += `<text x="${p.x}" y="${p.y + 13}" font-size="9" font-weight="700" fill="#CC0000" text-anchor="middle">${p.v}%</text>`;
+        marginHtml += `<rect x="${p.x - 3.5}" y="${p.y - 3.5}" width="7" height="7" fill="#CC0000"/>`;
+        marginHtml += `<text x="${p.x}" y="${p.y + 14}" font-size="9" font-weight="700" fill="#CC0000" text-anchor="middle">${p.v}%</text>`;
     });
 
-    // Legend
-    marginHtml += `<circle cx="280" cy="18" r="4" fill="#003366"/><text x="290" y="21" font-size="10" fill="#003366" font-weight="600">Gross Margin %</text>`;
-    marginHtml += `<rect x="390" y="14" width="7" height="7" fill="#CC0000"/><text x="402" y="21" font-size="10" fill="#CC0000" font-weight="600">EBITDA Margin %</text>`;
+    marginHtml += `<circle cx="280" cy="18" r="4" fill="#003366"/><text x="290" y="22" font-size="10.5" fill="#003366" font-weight="700">Gross Margin %</text>`;
+    marginHtml += `<rect x="400" y="14" width="7" height="7" fill="#CC0000"/><text x="412" y="22" font-size="10.5" fill="#CC0000" font-weight="700">EBITDA Margin %</text>`;
     svgMargin.innerHTML = marginHtml;
 
     // 3. DCF Waterfall Chart
@@ -812,24 +1060,23 @@ function renderCharts(c, dcf) {
     const pvT = dcf.pvTv;
     const ev = dcf.ev;
     const maxVal = (ev + Math.abs(c.net_debt)) * 1.15;
-
     const scale = v => (v / maxVal) * 140;
-    const wBar = 48;
-    let waterHtml = `<line x1="30" y1="170" x2="460" y2="170" stroke="#cbd5e1" stroke-width="1"/>`;
+    const wBar = 46;
+    let waterHtml = `<line x1="25" y1="175" x2="485" y2="175" stroke="#E2E8F0" stroke-width="1.5"/>`;
 
     const bars = [
-        { label: "PV(FCFs)", val: pvF, y: 170 - scale(pvF), h: scale(pvF), color: "#0066CC" },
-        { label: "PV(TV)", val: pvT, y: 170 - scale(pvF) - scale(pvT), h: scale(pvT), color: "#4D94DB" },
-        { label: "Enterprise Val", val: ev, y: 170 - scale(ev), h: scale(ev), color: "#003366" },
-        { label: c.net_debt < 0 ? "+Net Cash" : "-Net Debt", val: Math.abs(c.net_debt), y: 170 - scale(Math.abs(c.net_debt)), h: scale(Math.abs(c.net_debt)), color: c.net_debt < 0 ? "#2E7D32" : "#CC0000" },
-        { label: "Equity Value", val: dcf.eqVal, y: 170 - scale(dcf.eqVal), h: scale(dcf.eqVal), color: "#2E7D32" }
+        { label: "PV(FCFs)", val: pvF, y: 175 - scale(pvF), h: scale(pvF), color: "#0066CC" },
+        { label: "PV(TV)", val: pvT, y: 175 - scale(pvF) - scale(pvT), h: scale(pvT), color: "#4D94DB" },
+        { label: "Enterprise Val", val: ev, y: 175 - scale(ev), h: scale(ev), color: "#003366" },
+        { label: c.net_debt < 0 ? "+Net Cash" : "-Net Debt", val: Math.abs(c.net_debt), y: 175 - scale(Math.abs(c.net_debt)), h: scale(Math.abs(c.net_debt)), color: c.net_debt < 0 ? "#10B981" : "#CC0000" },
+        { label: "Equity Value", val: dcf.eqVal, y: 175 - scale(dcf.eqVal), h: scale(dcf.eqVal), color: "#10B981" }
     ];
 
     bars.forEach((b, i) => {
-        const x = 55 + i * 85;
-        waterHtml += `<rect x="${x - wBar/2}" y="${b.y}" width="${wBar}" height="${b.h}" fill="${b.color}" rx="2"/>`;
-        waterHtml += `<text x="${x}" y="${b.y - 5}" font-size="9" font-weight="700" fill="#1a1a2e" text-anchor="middle">${c.currency}${(b.val > 999 ? (b.val/1000).toFixed(1) + 'B' : Math.round(b.val) + 'M')}</text>`;
-        waterHtml += `<text x="${x}" y="185" font-size="9" fill="#475569" text-anchor="middle">${b.label}</text>`;
+        const x = 50 + i * 90;
+        waterHtml += `<rect x="${x - wBar/2}" y="${b.y}" width="${wBar}" height="${b.h}" fill="${b.color}" rx="3"/>`;
+        waterHtml += `<text x="${x}" y="${b.y - 6}" font-size="9.5" font-weight="700" fill="#0B192C" text-anchor="middle">${c.currency}${(b.val > 999 ? (b.val/1000).toFixed(1) + 'B' : Math.round(b.val) + 'M')}</text>`;
+        waterHtml += `<text x="${x}" y="192" font-size="9.5" font-weight="600" fill="#64748B" text-anchor="middle">${b.label}</text>`;
     });
     svgWater.innerHTML = waterHtml;
 
@@ -838,19 +1085,19 @@ function renderCharts(c, dcf) {
     const fcfs = [...c.fcf, ...dcf.projFcfs.slice(0, 3)];
     const fcfLabels = [...c.fiscal_years, "FY26E", "FY27E", "FY28E"];
     const maxF = Math.max(...fcfs.map(Math.abs), 500) * 1.3;
-    let fcfHtml = `<line x1="40" y1="140" x2="760" y2="140" stroke="#94a3b8" stroke-width="1.2"/>`;
-    const fSpacing = 88;
+    let fcfHtml = `<line x1="30" y1="135" x2="770" y2="135" stroke="#CBD5E1" stroke-width="1.5"/>`;
+    const fSpacing = 92;
 
     fcfs.forEach((val, i) => {
-        const x = 65 + i * fSpacing;
+        const x = 55 + i * fSpacing;
         const h = (Math.abs(val) / maxF) * 105;
-        const y = val >= 0 ? 140 - h : 140;
-        const color = val >= 0 ? (i >= c.fcf.length ? "#66BB6A" : "#2E7D32") : "#CC0000";
+        const y = val >= 0 ? 135 - h : 135;
+        const color = val >= 0 ? (i >= c.fcf.length ? "#34D399" : "#10B981") : "#EF4444";
 
-        fcfHtml += `<rect x="${x - 22}" y="${y}" width="44" height="${h}" fill="${color}" rx="2"/>`;
-        const textY = val >= 0 ? y - 6 : y + h + 12;
+        fcfHtml += `<rect x="${x - 22}" y="${y}" width="44" height="${h}" fill="${color}" rx="3"/>`;
+        const textY = val >= 0 ? y - 6 : y + h + 13;
         fcfHtml += `<text x="${x}" y="${textY}" font-size="10" font-weight="700" fill="${color}" text-anchor="middle">${c.currency}${(Math.abs(val) > 999 ? (val/1000).toFixed(1) + 'B' : Math.round(val) + 'M')}</text>`;
-        fcfHtml += `<text x="${x}" y="162" font-size="10" fill="#475569" text-anchor="middle">${fcfLabels[i]}</text>`;
+        fcfHtml += `<text x="${x}" y="156" font-size="10.5" font-weight="600" fill="#64748B" text-anchor="middle">${fcfLabels[i]}</text>`;
     });
     svgFcf.innerHTML = fcfHtml;
 }
@@ -861,22 +1108,34 @@ function renderCharts(c, dcf) {
 function selectCompany(key) {
     currentCompanyKey = key;
     const c = companies[key];
-    const dcf = calculateDCF(c);
 
-    // Update Company Switcher Pills
+    // Initialize sandbox sliders to target company baseline
+    document.getElementById("sliderWacc").value = (c.wacc * 100).toFixed(1);
+    document.getElementById("sliderWaccVal").textContent = `${(c.wacc * 100).toFixed(1)}%`;
+    document.getElementById("sliderTermG").value = (c.term_g * 100).toFixed(1);
+    document.getElementById("sliderTermGVal").textContent = `${(c.term_g * 100).toFixed(1)}%`;
+
+    const dcf = calculateDCF(c);
+    updateUIWithDCF(c, dcf);
+}
+
+function updateUIWithDCF(c, dcf) {
     renderPills();
 
     // Update Download Button dynamically
     const dlBtn = document.getElementById("downloadModelBtn");
     if (dlBtn) {
-        if (key === "TSLA") {
+        if (c.ticker === "TSLA") {
             dlBtn.href = "output/valuation_model.xlsx";
-        } else if (["ZOMATO", "AAPL", "BYD"].includes(key)) {
-            dlBtn.href = `output/valuation_model_${key}.xlsx`;
+        } else if (["ZOMATO", "AAPL", "BYD"].includes(c.ticker)) {
+            dlBtn.href = `output/valuation_model_${c.ticker}.xlsx`;
         } else {
             dlBtn.href = "output/valuation_model.xlsx";
         }
-        dlBtn.textContent = `📊 Download ${c.ticker} Model (.xlsx)`;
+        dlBtn.innerHTML = `
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2 2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download ${c.ticker} Model (.xlsx)
+        `;
     }
 
     // Slide 1 Updates
@@ -894,13 +1153,13 @@ function selectCompany(key) {
     for (let i = 0; i < c.fiscal_years.length; i++) {
         tableHtml += `
         <tr>
-            <td style="font-weight:600">${c.fiscal_years[i]}</td>
+            <td style="font-weight:700">${c.fiscal_years[i]}</td>
             <td>${c.currency}${c.revenue[i].toLocaleString()}</td>
-            <td>${c.gross_margin[i].toFixed(1)}%</td>
+            <td><span class="tag-badge ${c.gross_margin[i] >= 20 ? 'tag-green' : 'tag-red'}">${c.gross_margin[i].toFixed(1)}%</span></td>
             <td>${c.currency}${c.ebitda[i].toLocaleString()}</td>
             <td>${c.ebitda_margin[i].toFixed(1)}%</td>
             <td>${c.currency}${c.net_income[i].toLocaleString()}</td>
-            <td>${c.currency}${c.fcf[i].toLocaleString()}</td>
+            <td><strong>${c.currency}${c.fcf[i].toLocaleString()}</strong></td>
         </tr>`;
     }
     document.getElementById("histTableBody").innerHTML = tableHtml;
@@ -909,12 +1168,19 @@ function selectCompany(key) {
     document.getElementById("slide2Title").textContent = `${c.company} — Valuation & Benchmark Analysis`;
     const verdictBox = document.getElementById("verdictBox");
     const isUnder = dcf.upside > 0;
-    verdictBox.className = `verdict-box ${isUnder ? "undervalued" : "overvalued"}`;
+    verdictBox.className = `verdict-banner ${isUnder ? "undervalued" : "overvalued"}`;
     document.getElementById("verdictPrice").textContent = `DCF Implied Price: ${c.currency}${dcf.impliedPrice.toFixed(2)} per share`;
     document.getElementById("verdictDelta").innerHTML = `Target appears <strong>${isUnder ? "UNDERVALUED" : "OVERVALUED"}</strong> by ${Math.abs(dcf.upside).toFixed(1)}% vs market price of ${c.currency}${c.stock_price.toFixed(2)}`;
 
-    document.getElementById("dcfWacc").textContent = `${(c.wacc * 100).toFixed(2)}%`;
-    document.getElementById("dcfTermG").textContent = `${(c.term_g * 100).toFixed(2)}%`;
+    // Update Sandbox Box
+    document.getElementById("sandboxPrice").textContent = `${c.currency}${dcf.impliedPrice.toFixed(2)}`;
+    const sbBadge = document.getElementById("sandboxUpsideBadge");
+    sbBadge.textContent = `${isUnder ? '+' : ''}${dcf.upside.toFixed(1)}% ${isUnder ? 'Upside' : 'Downside'}`;
+    sbBadge.style.background = isUnder ? '#10B981' : '#EF4444';
+    sbBadge.style.color = 'white';
+
+    document.getElementById("dcfWacc").textContent = `${(dcf.wacc * 100).toFixed(2)}%`;
+    document.getElementById("dcfTermG").textContent = `${(dcf.termG * 100).toFixed(2)}%`;
     document.getElementById("dcfPvFcf").textContent = `${c.currency}${(dcf.pvFcfs / 1000).toFixed(1)}B`;
     document.getElementById("dcfPvTv").textContent = `${c.currency}${(dcf.pvTv / 1000).toFixed(1)}B`;
     document.getElementById("dcfEv").textContent = `${c.currency}${(dcf.ev / 1000).toFixed(1)}B`;
@@ -924,7 +1190,7 @@ function selectCompany(key) {
     // Comps Table
     let compsHtml = "";
     c.comps.forEach(peer => {
-        const rowStyle = peer.is_self ? 'class="row-highlight"' : '';
+        const rowStyle = peer.is_self ? 'class="row-bold"' : '';
         compsHtml += `
         <tr ${rowStyle}>
             <td>${peer.name}</td>
@@ -936,22 +1202,22 @@ function selectCompany(key) {
     document.getElementById("compsTableBody").innerHTML = compsHtml;
 
     // Sensitivity Table
-    let sensHtml = `<thead><tr><th>Rev Growth Δ \\ WACC</th>`;
+    let sensHtml = `<thead><tr><th>Rev Δ \\ WACC</th>`;
     dcf.waccDeltas.forEach(wd => {
-        sensHtml += `<th>${((c.wacc + wd) * 100).toFixed(1)}%</th>`;
+        sensHtml += `<th>${((dcf.wacc + wd) * 100).toFixed(1)}%</th>`;
     });
     sensHtml += `</tr></thead><tbody>`;
 
     dcf.sensGrid.forEach((row, ri) => {
         const rd = dcf.revDeltas[ri];
-        sensHtml += `<tr><td style="font-weight:600">${rd >= 0 ? '+' : ''}${(rd * 100).toFixed(0)}%</td>`;
+        sensHtml += `<tr><td style="font-weight:700">${rd >= 0 ? '+' : ''}${(rd * 100).toFixed(0)}%</td>`;
         row.forEach((val, ci) => {
             if (val === null) {
                 sensHtml += `<td>N/A</td>`;
             } else {
                 const isBase = (ri === 2 && ci === 2);
-                let cellClass = isBase ? "sens-cell-base" : (val > c.stock_price * 1.05 ? "sens-cell-green" : "sens-cell-red");
-                sensHtml += `<td class="${cellClass}">${c.currency}${val.toFixed(0)}</td>`;
+                let bgStyle = isBase ? "background:#FEF08A; font-weight:800;" : (val > c.stock_price * 1.05 ? "background:#D1FAE5; color:#065F46; font-weight:700;" : "background:#FEE2E2; color:#991B1B; font-weight:700;");
+                sensHtml += `<td style="${bgStyle}">${c.currency}${val.toFixed(0)}</td>`;
             }
         });
         sensHtml += `</tr>`;
@@ -961,17 +1227,30 @@ function selectCompany(key) {
 
     // Slide 3 Updates
     document.getElementById("slide3Title").textContent = `${c.company} — Strategic Recommendation`;
-    document.getElementById("recValuation").innerHTML = `<strong>Valuation Verdict:</strong> ${c.thesis.verdict}`;
-    document.getElementById("recCatalysts").innerHTML = `<strong>Key Catalysts:</strong> ${c.thesis.catalysts}`;
-    document.getElementById("recRisk").innerHTML = `<strong>Strategic Risk:</strong> ${c.thesis.risk}<br><br><strong>Mitigation Framework:</strong> ${c.thesis.mitigation}`;
+    document.getElementById("recValuation").innerHTML = `<strong>Valuation Summary:</strong> ${c.thesis.verdict}`;
+    document.getElementById("recCatalysts").innerHTML = `<strong>Growth Catalysts:</strong> ${c.thesis.catalysts}`;
+    document.getElementById("recRisk").innerHTML = `<strong>Risk:</strong> ${c.thesis.risk}<br><br><strong>Mitigation Strategy:</strong> ${c.thesis.mitigation}`;
 
     // Footers
-    document.getElementById("footerCompName").textContent = c.company;
+    document.getElementById("footerCompName1").textContent = c.company;
     document.getElementById("footerCompName2").textContent = c.company;
     document.getElementById("footerCompName3").textContent = c.company;
 
-    // Render Canvas/SVG Charts
+    // Render Charts
     renderCharts(c, dcf);
+}
+
+// Handle Slider Changes
+function handleSandboxChange() {
+    const c = companies[currentCompanyKey];
+    const wacc = parseFloat(document.getElementById("sliderWacc").value) / 100;
+    const termG = parseFloat(document.getElementById("sliderTermG").value) / 100;
+
+    document.getElementById("sliderWaccVal").textContent = `${(wacc * 100).toFixed(1)}%`;
+    document.getElementById("sliderTermGVal").textContent = `${(termG * 100).toFixed(1)}%`;
+
+    const dcf = calculateDCF(c, wacc, termG);
+    updateUIWithDCF(c, dcf);
 }
 
 function renderPills() {
@@ -981,18 +1260,44 @@ function renderPills() {
         const comp = companies[k];
         const isActive = (k === currentCompanyKey);
         const isCustom = !BASE_COMPANIES[k];
+        const icon = comp.icon || "📊";
         html += `
         <button class="company-pill ${isActive ? 'active' : ''} ${isCustom ? 'custom' : ''}" onclick="selectCompany('${k}')">
-            <span>${comp.company}</span>
-            <span style="font-size:11px; opacity:0.8;">(${comp.ticker})</span>
+            <span>${icon}</span>
+            <span>${comp.company.split(' ')[0]}</span>
+            <span class="pill-ticker">${comp.ticker}</span>
         </button>`;
     });
     container.innerHTML = html;
 }
 
+function scrollToSlide(slideId) {
+    document.querySelectorAll(".step-btn").forEach(btn => btn.classList.remove("active"));
+    const el = document.getElementById(slideId);
+    if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+}
+
 // Modal handling
 function openAddModal() { document.getElementById("addModal").classList.add("open"); }
 function closeAddModal() { document.getElementById("addModal").classList.remove("open"); }
+
+function autofillSample() {
+    document.getElementById("custName").value = "Nvidia Corporation";
+    document.getElementById("custTicker").value = "NVDA";
+    document.getElementById("custSector").value = "Accelerated AI Compute & Datacenter";
+    document.getElementById("custCurrency").value = "$";
+    document.getElementById("custPrice").value = "120.00";
+    document.getElementById("custShares").value = "24500";
+    document.getElementById("custRev").value = "60922";
+    document.getElementById("custCagr").value = "54.2";
+    document.getElementById("custGrossMargin").value = "72.7";
+    document.getElementById("custEbitdaMargin").value = "58.5";
+    document.getElementById("custWacc").value = "9.5";
+    document.getElementById("custTermG").value = "3.0";
+    document.getElementById("custThesis").value = "Generational monopoly in AI training and inference GPUs (Blackwell/Hopper), with CUDA software ecosystem creating impenetrable moat.";
+}
 
 function handleCustomSubmit(e) {
     e.preventDefault();
@@ -1010,7 +1315,6 @@ function handleCustomSubmit(e) {
     const termG = parseFloat(document.getElementById("custTermG").value) / 100;
     const thesisText = document.getElementById("custThesis").value.trim();
 
-    // Generate historical synthetic trend
     const years = ["FY2021", "FY2022", "FY2023", "FY2024", "FY2025E"];
     const r1 = rev / Math.pow(1 + (cagr/100), 4);
     const r2 = r1 * (1 + (cagr/100));
@@ -1020,48 +1324,61 @@ function handleCustomSubmit(e) {
     const newComp = {
         company: name,
         ticker: ticker,
+        icon: "💎",
         sector: sector,
         currency: curr,
         unit_label: curr + "M",
         market_cap: `${curr}${((price * shares)/1000).toFixed(1)}B`,
         stock_price: price,
         shares: shares,
-        overview: `${name} is a high-conviction target operating in ${sector}. Analyzed for M&A due diligence.`,
+        overview: `${name} is a market-leading target in ${sector}, evaluated for commercial M&A due diligence.`,
         fiscal_years: years,
         revenue: [Math.round(r1), Math.round(r2), Math.round(r3), Math.round(r4), Math.round(rev)],
         gross_margin: [Math.max(10, gm - 4), Math.max(10, gm - 2), gm - 1, gm, gm],
         ebitda: [Math.round(r1 * (em-5)/100), Math.round(r2 * (em-3)/100), Math.round(r3 * (em-1)/100), Math.round(r4 * em/100), Math.round(rev * em/100)],
         ebitda_margin: [em - 5, em - 3, em - 1, em, em],
-        net_income: [Math.round(r1 * 0.08), Math.round(r2 * 0.10), Math.round(r3 * 0.12), Math.round(r4 * 0.14), Math.round(rev * 0.15)],
-        fcf: [Math.round(r1 * 0.05), Math.round(r2 * 0.07), Math.round(r3 * 0.09), Math.round(r4 * 0.11), Math.round(rev * 0.12)],
+        net_income: [Math.round(r1 * 0.1), Math.round(r2 * 0.12), Math.round(r3 * 0.15), Math.round(r4 * 0.18), Math.round(rev * 0.20)],
+        fcf: [Math.round(r1 * 0.08), Math.round(r2 * 0.10), Math.round(r3 * 0.12), Math.round(r4 * 0.15), Math.round(rev * 0.18)],
         net_debt: 0,
         wacc: wacc,
         term_g: termG,
-        growth_projections: [0.15, 0.12, 0.10, 0.08, 0.06],
+        growth_projections: [0.20, 0.16, 0.12, 0.10, 0.08],
         ebitda_targets: [em/100, (em+1)/100, (em+2)/100, (em+3)/100, (em+4)/100],
         comps: [
-            { name: name, ev_r: "—", ev_eb: "—", pe: "—", is_self: true },
-            { name: "Peer Benchmark A", ev_r: "5.2x", ev_eb: "18.4x", pe: "24.0x" },
-            { name: "Peer Benchmark B", ev_r: "3.8x", ev_eb: "14.2x", pe: "19.5x" }
+            { name: `${name} (Target)`, ev_r: "—", ev_eb: "—", pe: "—", is_self: true },
+            { name: "Peer Benchmark A", ev_r: "6.5x", ev_eb: "22.4x", pe: "28.0x" },
+            { name: "Peer Benchmark B", ev_r: "4.2x", ev_eb: "16.1x", pe: "21.5x" }
         ],
-        operational_insight: `Consistently expanding gross margins (${gm.toFixed(1)}%) supported by structural top-line CAGR of ${cagr.toFixed(1)}%.`,
+        operational_insight: `Structural gross margins (${gm.toFixed(1)}%) supported by a 4-year revenue CAGR of ${cagr.toFixed(1)}%.`,
         thesis: {
-            verdict: `Comprehensive DCF model computed across baseline cost of capital (${(wacc*100).toFixed(1)}%).`,
-            catalysts: `1) Market Leadership: Expanding share across ${sector}. 2) Strategic Thesis: ${thesisText}`,
-            risk: "Market execution headwinds, inflationary supplier input pressures, and multiple compression.",
-            mitigation: "Operating leverage and high-margin product mix diversification provide downside earnings protection."
+            verdict: `Computed intrinsic DCF model under baseline cost of capital of ${(wacc*100).toFixed(1)}%.`,
+            catalysts: `1) Category Dominance: Structural moat across ${sector}. 2) Core Thesis: ${thesisText}`,
+            risk: "Multiple compression headwinds, customer capex cycle volatility, and regulatory export restrictions.",
+            mitigation: "Exceptional free cash flow conversion and recurring software/platform monetization provide downside protection."
         }
     };
 
     companies[ticker] = newComp;
-    saveCustomCompany(ticker, newComp);
+    try {
+        let customOnly = {};
+        const saved = localStorage.getItem("bain_custom_companies");
+        if (saved) customOnly = JSON.parse(saved);
+        customOnly[ticker] = newComp;
+        localStorage.setItem("bain_custom_companies", JSON.stringify(customOnly));
+    } catch(e) {}
+
     closeAddModal();
     selectCompany(ticker);
 }
 
 // Initialize on page load
 window.addEventListener("DOMContentLoaded", () => {
-    loadCustomCompanies();
+    try {
+        const saved = localStorage.getItem("bain_custom_companies");
+        if (saved) {
+            companies = { ...BASE_COMPANIES, ...JSON.parse(saved) };
+        }
+    } catch(e) {}
     selectCompany("TSLA");
 });
 </script>
